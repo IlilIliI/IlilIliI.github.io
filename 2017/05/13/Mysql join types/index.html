@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Notes" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。本文参考链接: ​    https://dev.mysql.com/doc/refman/5.6/en/join.html mysql官方文档 ​        https://www.">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql join 详解">
+<meta property="og:url" content="http://www.yq194.top/2017/05/13/Mysql join types/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。本文参考链接: ​    https://dev.mysql.com/doc/refman/5.6/en/join.html mysql官方文档 ​        https://www.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.yq194.top/images/1.pic.jpg">
+<meta property="og:image" content="http://www.yq194.top/images/QQ20170513-154336@2x.png">
+<meta property="og:image" content="http://www.yq194.top/images/QQ20170513-154349@2x.png">
+<meta property="og:image" content="http://www.yq194.top/images/QQ20170513-154402@2x.png">
+<meta property="og:image" content="http://www.yq194.top/images/Visual_SQL_JOINS_orig.jpg">
+<meta property="og:image" content="http://www.yq194.top/images/joinTypeThumbnail1.png">
+<meta property="og:updated_time" content="2017-05-13T08:52:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql join 详解">
+<meta name="twitter:description" content="SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。本文参考链接: ​    https://dev.mysql.com/doc/refman/5.6/en/join.html mysql官方文档 ​        https://www.">
+<meta name="twitter:image" content="http://www.yq194.top/images/1.pic.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yq194.top/2017/05/13/Mysql join types/"/>
+
+
+
+
+
+  <title>mysql join 详解 | Notes</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?37d975387911298100a71754f2730344";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yq194.top/2017/05/13/Mysql join types/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql join 详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-13T22:44:21+08:00">
+                2017-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<h5 id="SQL-JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。"><a href="#SQL-JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。" class="headerlink" title="SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。"></a>SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。</h5><p>本文参考链接:</p>
+<p>​    <a href="https://dev.mysql.com/doc/refman/5.6/en/join.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.6/en/join.html</a> mysql官方文档</p>
+<p>​        <a href="https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins" target="_blank" rel="noopener">https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins</a>  codeproject文章</p>
+<p>​        <a href="https://academy.vertabelo.com/blog/sql-joins/" target="_blank" rel="noopener">https://academy.vertabelo.com/blog/sql-joins/</a> mysql joins</p>
+<p>​        <a href="http://stevestedman.com/2015/03/mysql-join-types-poster/" target="_blank" rel="noopener">http://stevestedman.com/2015/03/mysql-join-types-poster/</a>  某博客整理的join图</p>
+<p>​    <a href="http://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join/6188334#6188334" target="_blank" rel="noopener">http://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join/6188334#6188334</a> stackoverflow</p>
+</blockquote>
+<h4 id="一、一般来说，大致分为如下四类"><a href="#一、一般来说，大致分为如下四类" class="headerlink" title="一、一般来说，大致分为如下四类:"></a>一、一般来说，大致分为如下四类:</h4><ul>
+<li><p><strong>INNER JOIN (内连接)</strong></p>
+</li>
+<li><p><strong>OUTER [LEFT | RIGHT | FULL] JOIN （外连接）</strong></p>
+</li>
+<li><p><strong>NATURAL JOIN  (自然连接)</strong></p>
+</li>
+<li><p><strong>CROSS JOIN （交叉连接）</strong></p>
+</li>
+<li><p>(mysq中有TRAIGHT_JOIN)</p>
+<p>值得注意的是内连接和外连接后接的条件操作符可以是”&gt;”,”&lt;”,”=”,”&gt;=”,”&lt;=”</p>
+<p>但是,mysql官方文档中是这样写的:</p>
+</li>
+</ul>
+<p>​     MySQL对SELECT语句的table_references(下面的引用)部分和多表DELETE和UPDATE语句支持JOIN语法(具体如下 )：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">table_references:</span><br><span class="line">    escaped_table_reference [, escaped_table_reference] ...</span><br><span class="line"></span><br><span class="line">escaped_table_reference:</span><br><span class="line">    table_reference</span><br><span class="line">  | &#123; OJ table_reference &#125;</span><br><span class="line"></span><br><span class="line">table_reference:</span><br><span class="line">    table_factor</span><br><span class="line">  | join_table</span><br><span class="line"></span><br><span class="line">table_factor:</span><br><span class="line">    tbl_name [PARTITION (partition_names)]</span><br><span class="line">        [[AS] alias] [index_hint_list]</span><br><span class="line">  | table_subquery [AS] alias</span><br><span class="line">  | ( table_references )</span><br><span class="line"></span><br><span class="line">join_table:</span><br><span class="line">    table_reference [INNER | CROSS] JOIN table_factor [join_condition]</span><br><span class="line">  | table_reference STRAIGHT_JOIN table_factor</span><br><span class="line">  | table_reference STRAIGHT_JOIN table_factor ON conditional_expr</span><br><span class="line">  | table_reference &#123;LEFT|RIGHT&#125; [OUTER] JOIN table_reference join_condition</span><br><span class="line">  | table_reference NATURAL [&#123;LEFT|RIGHT&#125; [OUTER]] JOIN table_factor</span><br><span class="line"></span><br><span class="line">join_condition:</span><br><span class="line">    ON conditional_expr</span><br><span class="line">  | USING (column_list)</span><br><span class="line"></span><br><span class="line">index_hint_list:</span><br><span class="line">    index_hint [, index_hint] ...</span><br><span class="line"></span><br><span class="line">index_hint:</span><br><span class="line">    <span class="keyword">USE</span> &#123;<span class="keyword">INDEX</span>|<span class="keyword">KEY</span>&#125;</span><br><span class="line">      [<span class="keyword">FOR</span> &#123;<span class="keyword">JOIN</span>|<span class="keyword">ORDER</span> <span class="keyword">BY</span>|<span class="keyword">GROUP</span> <span class="keyword">BY</span>&#125;] ([index_list])</span><br><span class="line">  | <span class="keyword">IGNORE</span> &#123;<span class="keyword">INDEX</span>|<span class="keyword">KEY</span>&#125;</span><br><span class="line">      [<span class="keyword">FOR</span> &#123;<span class="keyword">JOIN</span>|<span class="keyword">ORDER</span> <span class="keyword">BY</span>|<span class="keyword">GROUP</span> <span class="keyword">BY</span>&#125;] (index_list)</span><br><span class="line">  | <span class="keyword">FORCE</span> &#123;<span class="keyword">INDEX</span>|<span class="keyword">KEY</span>&#125;</span><br><span class="line">      [<span class="keyword">FOR</span> &#123;<span class="keyword">JOIN</span>|<span class="keyword">ORDER</span> <span class="keyword">BY</span>|<span class="keyword">GROUP</span> <span class="keyword">BY</span>&#125;] (index_list)</span><br><span class="line"></span><br><span class="line">index_list:</span><br><span class="line">    index_name [, index_name] ...</span><br></pre></td></tr></table></figure>
+<p>从上来看，主要两个方面:</p>
+<p>​    1.mysql中会有以下join出现:</p>
+<p>​        <strong>INNER JOIN</strong>( 内连接),<strong>CROSS JOIN</strong>(交叉连接),这两个可以不带ON</p>
+<p>​        <strong>STRAIGHT_JOIN</strong>(直接连接,可带ON也可以不带ON),</p>
+<p>​        <strong>LEFT|RIGHT|FULL [OUTER] JOIN</strong> 左连接或左外连接或全连接,</p>
+<p>​        <strong>NATURAL [{LEFT|RIGHT} [OUTER]] JOIN</strong> 自然连接(左|右)        </p>
+<p>​         2.mysql中可以使用<strong>USING</strong>来处理像<strong>ON</strong>这样的条件，下面会详细说明。</p>
+<h4 id="二、用实例来说明这些JOIN的区别"><a href="#二、用实例来说明这些JOIN的区别" class="headerlink" title="二、用实例来说明这些JOIN的区别:"></a>二、用实例来说明这些JOIN的区别:</h4><p>​    首先定两张表如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  TableB 						TableA</span><br><span class="line">+------+--------+   		        +------+--------+</span><br><span class="line">| b_id | b_name |	 		| a_id | a_name |</span><br><span class="line">+------+--------+    		        +------+--------+</span><br><span class="line">| A    | apple  |			|    1 | apple  |</span><br><span class="line">| B    | banana |			|    2 | orange |</span><br><span class="line">| C    | NULL   |			|    3 | NULL   |</span><br><span class="line">+------+--------+			+------+--------+</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<h4 id="（一）外连接-左外连接，右外连接，完整外连接"><a href="#（一）外连接-左外连接，右外连接，完整外连接" class="headerlink" title="（一）外连接(左外连接，右外连接，完整外连接)"></a>（一）外连接(左外连接，右外连接，完整外连接)</h4><ol>
+<li><p><strong>LEFT JOIN</strong>:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select * from TableA left join TableB on TableA.a_name = TableB.b_name</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| a_id | a_name | b_id | b_name |</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">|    1 | apple  | A    | apple  |</span><br><span class="line">|    2 | orange | NULL | NULL   |</span><br><span class="line">|    3 | NULL   | NULL | NULL   |</span><br><span class="line">+------+--------+------+--------+</span><br></pre></td></tr></table></figure>
+<p>left join 以左表主基准,返回左表的全部记录，如果on后面条件匹配，会带出右表的匹配记录,右表中不匹配的列全是NULL。下面为图解:</p>
+<p><img src="/images/1.pic.jpg" alt="1.pic"></p>
+<p>​                  (不难看出:连接出来不等的右边会取一条null记录来给左表对应)</p>
+</li>
+</ol>
+<p>{0}.    <strong>RIGHT JOIN</strong></p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM test.TableA RIGHT JOIN test.TableB ON test.TableA.a_name = test.TableB.b_name;</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| a_id | a_name | b_id | b_name |</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">|    1 | apple  | A    | apple  |</span><br><span class="line">| NULL | NULL   | B    | banana |</span><br><span class="line">| NULL | NULL   | C    | NULL   |</span><br><span class="line">+------+--------+------+--------+</span><br></pre></td></tr></table></figure>
+
+与LEFT JOIN相反 :       ![2.pic](/images/2.pic.jpg)
+</code></pre><p>{0}.    <strong>FULL JOIN</strong>（不能带ON条件）</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">select * from TableA full join TableB;</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| a_id | a_name | b_id | b_name |</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">|    1 | apple  | A    | apple  |</span><br><span class="line">|    1 | apple  | B    | banana |</span><br><span class="line">|    1 | apple  | C    | NULL   |</span><br><span class="line">|    2 | orange | A    | apple  |</span><br><span class="line">|    2 | orange | B    | banana |</span><br><span class="line">|    2 | orange | C    | NULL   |</span><br><span class="line">|    3 | NULL   | A    | apple  |</span><br><span class="line">|    3 | NULL   | B    | banana |</span><br><span class="line">|    3 | NULL   | C    | NULL   |</span><br><span class="line">+------+--------+------+--------+</span><br></pre></td></tr></table></figure>
+
+ 外连接的full join 及自然连接的natural join不能带on条件，cross join可以带on条件
+
+如果三者都不带条件的情况下就全连接即笛卡尔集！
+
+​
+
+#### （二）内连接(INNER JOIN)
+</code></pre><p>{0}.    <strong>INNER JOIN</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select * from TableA inner join TableB on TableA.a_name = TableB.b_name</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| a_id | a_name | b_id | b_name |</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">|    1 | apple  | A    | apple  |</span><br><span class="line">+------+--------+------+--------+</span><br></pre></td></tr></table></figure>
+<p>inner join会根据条件匹配找到条件相等的列，它并不像上面的left join 和right join一样返回左或右边表的所有记录。</p>
+<h4 id="（三）交叉连接-CROSS-JOIN"><a href="#（三）交叉连接-CROSS-JOIN" class="headerlink" title="（三）交叉连接(CROSS JOIN)"></a>（三）交叉连接(CROSS JOIN)</h4><ul>
+<li>5.<strong>CROSS JOIN</strong>（通常的笛卡尔集）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">select * from TableA cross join TableB;</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| a_id | a_name | b_id | b_name |</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">|    1 | apple  | A    | apple  |</span><br><span class="line">|    1 | apple  | B    | banana |</span><br><span class="line">|    1 | apple  | C    | NULL   |</span><br><span class="line">|    2 | orange | A    | apple  |</span><br><span class="line">|    2 | orange | B    | banana |</span><br><span class="line">|    2 | orange | C    | NULL   |</span><br><span class="line">|    3 | NULL   | A    | apple  |</span><br><span class="line">|    3 | NULL   | B    | banana |</span><br><span class="line">|    3 | NULL   | C    | NULL   |</span><br><span class="line">+------+--------+------+--------+</span><br></pre></td></tr></table></figure>
+<p>就是依次把左表的每一列去与右所有列对应，相当于A:2x3, B:2x3 == &gt; 4*9 ;</p>
+<p>cross join不带条件就笛卡尔集，带条件就会根据条件去掉相应的列!!!</p>
+<h5 id="（四）自然连接-NATURAL-JOIN-应该可以直接分类到外连接包括为左自然连接和右自然连接-需要注意：自然连接不带ON条件"><a href="#（四）自然连接-NATURAL-JOIN-应该可以直接分类到外连接包括为左自然连接和右自然连接-需要注意：自然连接不带ON条件" class="headerlink" title="（四）自然连接(NATURAL JOIN),应该可以直接分类到外连接包括为左自然连接和右自然连接(需要注意：自然连接不带ON条件)"></a>（四）自然连接(NATURAL JOIN),应该可以直接分类到外连接包括为左自然连接和右自然连接(需要注意：自然连接不带ON条件)</h5><ul>
+<li><p><strong>NATURAL JOIN</strong></p>
+<p>这个就不用列出了，就是笛卡尔集，也是full join</p>
+</li>
+<li><p><strong>NATRUAL LEFT JOIN</strong>|<strong>NATRUAL LEFT JOIN</strong></p>
+<p>natural join分左右应该只是连接时以左或右为基准去连接，实际上连接</p>
+<p>的结果与natural join的结果一样。（感觉这个自然连接意义不大）</p>
+<p>​</p>
+</li>
+</ul>
+<h4 id="二、下面再来讨论一些比较特殊但可能很有用的JOINS"><a href="#二、下面再来讨论一些比较特殊但可能很有用的JOINS" class="headerlink" title="二、下面再来讨论一些比较特殊但可能很有用的JOINS"></a>二、下面再来讨论一些比较特殊但可能很有用的JOINS</h4><ol>
+<li><p><strong>LEFT JOIN EXCLUDING INNER JOIN</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM TableA LEFT  JOIN test.TableB ON TableA.a_name = TableB.b_name</span><br><span class="line">WHERE TableB.b_name IS NULL;</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| a_id | a_name | b_id | b_name |</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">|    2 | orange | NULL | NULL   |</span><br><span class="line">|    3 | NULL   | NULL | NULL   |</span><br><span class="line">+------+--------+------+--------+</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/images/QQ20170513-154336@2x.png" alt="QQ20170513-154336@2x"></p>
+<p>返回的结果中是左表的结果(不包含两表的交集‘)</p>
+<ol>
+<li><h4 id="Right-Excluding-JOIN"><a href="#Right-Excluding-JOIN" class="headerlink" title="Right Excluding JOIN"></a>Right Excluding JOIN</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM TableA RIGHT  JOIN TableB ON TableA.a_name = TableB.b_name WHERE TableA.a_name IS NULL;</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| a_id | a_name | b_id | b_name |</span><br><span class="line">+------+--------+------+--------+</span><br><span class="line">| NULL | NULL   | B    | banana |</span><br><span class="line">| NULL | NULL   | C    | NULL   |</span><br><span class="line">+------+--------+------+--------+</span><br></pre></td></tr></table></figure>
+<p><img src="/images/QQ20170513-154349@2x.png" alt="QQ20170513-154349@2x"></p>
+<p>返回的结果是右表的集(除去了两表的交集)</p>
+</li>
+<li><h4 id="Outer-Excluding-JOIN"><a href="#Outer-Excluding-JOIN" class="headerlink" title="Outer Excluding JOIN"></a>Outer Excluding JOIN</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM TableA  JOIN test.TableB ON TableA.a_name = TableB.b_name WHERE TableA.a_name IS NULL OR TableB.b_name IS NULL;</span><br><span class="line">等价于:</span><br><span class="line"> (Right Excluding JOIN) UNION  (LEFT JOIN EXCLUDING INNER JOIN)</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<p><img src="/images/QQ20170513-154402@2x.png" alt="QQ20170513-154402@2x"></p>
+<p>返回的是两表的非交集,这里没有数据主要是我表的数据设置有点问题，不过从</p>
+<p><a href="https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins" target="_blank" rel="noopener">https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins</a> 这篇文章及例子可以了解。</p>
+</li>
+</ol>
+<p>最后mysql中有一个<strong>STRAIGHT_JOIN</strong>,它的表现与<strong>INNER JOIN</strong>相同，详细请看下面这个博客 :</p>
+<p>​       <a href="http://blog.itpub.net/22664653/viewspace-772357/" target="_blank" rel="noopener">【MySQL】性能优化之 straight_join </a></p>
+<h4 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结 :"></a>三、总结 :</h4><p>​    通过以上的分类可以了解到sql join的具体分类及使用,通过整理应该可以更加好的了解sql join以及mysql join的具体形式及用法 .下面放上盗来的图）)：</p>
+<p>​    图1：</p>
+<p>​        <img src="/images/Visual_SQL_JOINS_orig.jpg" alt="Visual_SQL_JOINS_orig"></p>
+<p>图2：下图还包含3表连接的状态 :</p>
+<p><img src="/images/joinTypeThumbnail1.png" alt="joinTypeThumbnail1"></p>
+<p>注:图中部分出处都有地址注明，请参见文章开头</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/07/Java-I-O流-一-字节流/" rel="prev" title="Java I/O流(一):字节流">
+                Java I/O流(一):字节流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Yang" />
+            
+              <p class="site-author-name" itemprop="name">Yang</p>
+              <p class="site-description motion-element" itemprop="description">好记性不如烂笔头。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL-JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。"><span class="nav-number">1.</span> <span class="nav-text">SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、一般来说，大致分为如下四类"><span class="nav-number"></span> <span class="nav-text">一、一般来说，大致分为如下四类:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、用实例来说明这些JOIN的区别"><span class="nav-number"></span> <span class="nav-text">二、用实例来说明这些JOIN的区别:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（一）外连接-左外连接，右外连接，完整外连接"><span class="nav-number"></span> <span class="nav-text">（一）外连接(左外连接，右外连接，完整外连接)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（三）交叉连接-CROSS-JOIN"><span class="nav-number"></span> <span class="nav-text">（三）交叉连接(CROSS JOIN)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（四）自然连接-NATURAL-JOIN-应该可以直接分类到外连接包括为左自然连接和右自然连接-需要注意：自然连接不带ON条件"><span class="nav-number">1.</span> <span class="nav-text">（四）自然连接(NATURAL JOIN),应该可以直接分类到外连接包括为左自然连接和右自然连接(需要注意：自然连接不带ON条件)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、下面再来讨论一些比较特殊但可能很有用的JOINS"><span class="nav-number"></span> <span class="nav-text">二、下面再来讨论一些比较特殊但可能很有用的JOINS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Right-Excluding-JOIN"><span class="nav-number"></span> <span class="nav-text">Right Excluding JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Outer-Excluding-JOIN"><span class="nav-number"></span> <span class="nav-text">Outer Excluding JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、总结"><span class="nav-number"></span> <span class="nav-text">三、总结 :</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
