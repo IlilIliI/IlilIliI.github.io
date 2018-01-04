@@ -5,19 +5,19 @@
     
     <title>Java集合之 ArrayList 笔记 | Notes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1. ArrayList概述及层次结构(JDK1.8.0_131):     12public class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable">
+    <meta name="description" content="1. ArrayList概述及层次结构(JDK1.8.0_131):  ArrayList的底层是对象数组Object[]，可存储null 未指定初始化大小的默认容量大小是10，超过指定容量后ArrayList采用自动扩容，容量为原来的1.5倍(也就是增加了原来的50%)，1.5倍不大不小刚好，2，2.5。。。都会占用内存大 ArrayList的扩容采用的System.arraycopy()进行">
 <meta name="keywords" content="Java集合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合之 ArrayList 笔记">
 <meta property="og:url" content="http://www.yq194.top/2017/12/27/Java集合之-ArrayList-笔记/index.html">
 <meta property="og:site_name" content="Notes">
-<meta property="og:description" content="1. ArrayList概述及层次结构(JDK1.8.0_131):     12public class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable">
+<meta property="og:description" content="1. ArrayList概述及层次结构(JDK1.8.0_131):  ArrayList的底层是对象数组Object[]，可存储null 未指定初始化大小的默认容量大小是10，超过指定容量后ArrayList采用自动扩容，容量为原来的1.5倍(也就是增加了原来的50%)，1.5倍不大不小刚好，2，2.5。。。都会占用内存大 ArrayList的扩容采用的System.arraycopy()进行">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.yq194.top/images/ArrayList.png">
-<meta property="og:updated_time" content="2018-01-03T08:59:51.000Z">
+<meta property="og:updated_time" content="2018-01-04T02:31:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合之 ArrayList 笔记">
-<meta name="twitter:description" content="1. ArrayList概述及层次结构(JDK1.8.0_131):     12public class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable">
+<meta name="twitter:description" content="1. ArrayList概述及层次结构(JDK1.8.0_131):  ArrayList的底层是对象数组Object[]，可存储null 未指定初始化大小的默认容量大小是10，超过指定容量后ArrayList采用自动扩容，容量为原来的1.5倍(也就是增加了原来的50%)，1.5倍不大不小刚好，2，2.5。。。都会占用内存大 ArrayList的扩容采用的System.arraycopy()进行">
 <meta name="twitter:image" content="http://www.yq194.top/images/ArrayList.png">
     
 
@@ -225,18 +225,16 @@
         
             
             <p><a href=""> 1. <strong>ArrayList概述及层次结构(JDK1.8.0_131)</strong>:</a></p>
-<p>   <img src="/images/ArrayList.png" alt="ArrayList"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
 <ul>
 <li>ArrayList的底层是对象数组Object[]，可存储null</li>
 <li>未指定初始化大小的默认容量大小是10，超过指定容量后ArrayList采用自动扩容，容量为原来的1.5倍(也就是增加了原来的50%)，1.5倍不大不小刚好，2，2.5。。。都会占用内存大</li>
 <li>ArrayList的扩容采用的System.arraycopy()进行复制;</li>
 <li>底层是数组决定的查找快，增删慢的特性。get（i），set（i，e） 的性能很高，而remove(i,e)，add(i,e)时需要通过System.arraycopy()复制来达移动数组的目的;</li>
-<li>ArrayList是非线程安全的，需要同步情况下可在构造时生成同步的List实例或采用java.util.concurrent下的并发类：</li>
-<li><code>List list =  Collections.synchronizedList(new ArrayList(...));</code> </li>
-<li><code>CopyOnWriteArrayList list = new CopyOnWriteArrayList();</code></li>
+<li>ArrayList是非线程安全的，需要同步情况下可在构造时生成同步的List实例或采用java.util.concurrent下的并发类：<br><code>List list =  Collections.synchronizedList(new ArrayList(...));</code><br><code>CopyOnWriteArrayList list = new CopyOnWriteArrayList();</code></li>
 </ul>
+<!-- Read More -->
+<p>   <img src="/images/ArrayList.png" alt="ArrayList"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
 <p><a href=""> 2. <strong>ArrayList部分源码分析</strong>:</a></p>
 <blockquote>
 <p>ArrayList的使用非常多,在下面的分析中会对ArrayList中的set,add,remove等等操作进行源码分析</p>
@@ -275,7 +273,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2017/12/27/Java集合之-ArrayList-笔记/" data-id="cjbyua8gg0003h7s66gt5r9uw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2017/12/27/Java集合之-ArrayList-笔记/" data-id="cjbzvn6yq000746s6k1kgqs6e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

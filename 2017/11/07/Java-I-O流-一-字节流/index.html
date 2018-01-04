@@ -5,19 +5,19 @@
     
     <title>Java I/O流(一):字节流 | Notes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Java I/O 流(一) : 字节流  Java中流的原理:                             ​                             $~~$ $$ $~~$ (图片来源于网络)    可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(">
+    <meta name="description" content="Java I/O 流(一) : 字节流  Java中流的原理:   可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(管道中流的就是01010101… 这样的字节数据)  将管道中流进行过滤、包装、转换等操作就产生一系列的装饰流。  Java中的IO流是指字节数据（bytes da">
 <meta name="keywords" content="IO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java I&#x2F;O流(一):字节流">
 <meta property="og:url" content="http://www.yq194.top/2017/11/07/Java-I-O流-一-字节流/index.html">
 <meta property="og:site_name" content="Notes">
-<meta property="og:description" content="Java I/O 流(一) : 字节流  Java中流的原理:                             ​                             $~~$ $$ $~~$ (图片来源于网络)    可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(">
+<meta property="og:description" content="Java I/O 流(一) : 字节流  Java中流的原理:   可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(管道中流的就是01010101… 这样的字节数据)  将管道中流进行过滤、包装、转换等操作就产生一系列的装饰流。  Java中的IO流是指字节数据（bytes da">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.yq194.top/images/io.png">
-<meta property="og:updated_time" content="2018-01-03T08:58:36.000Z">
+<meta property="og:updated_time" content="2018-01-04T02:31:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java I&#x2F;O流(一):字节流">
-<meta name="twitter:description" content="Java I/O 流(一) : 字节流  Java中流的原理:                             ​                             $~~$ $$ $~~$ (图片来源于网络)    可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(">
+<meta name="twitter:description" content="Java I/O 流(一) : 字节流  Java中流的原理:   可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(管道中流的就是01010101… 这样的字节数据)  将管道中流进行过滤、包装、转换等操作就产生一系列的装饰流。  Java中的IO流是指字节数据（bytes da">
 <meta name="twitter:image" content="http://www.yq194.top/images/io.png">
     
 
@@ -227,15 +227,11 @@
             <blockquote>
 <h3 id="Java-I-O-流-一-字节流"><a href="#Java-I-O-流-一-字节流" class="headerlink" title="Java I/O 流(一) : 字节流"></a>Java I/O 流(一) : 字节流</h3></blockquote>
 <ol>
-<li><h4 id="Java中流的原理"><a href="#Java中流的原理" class="headerlink" title="Java中流的原理:"></a><strong>Java中流的原理:</strong></h4><p><img src="/images/io.png" alt="io.png">                            </p>
-<p>​                             $<del>~~$ $</del><del>$ $</del>~~$ (图片来源于网络)</p>
-</li>
+<li><h4 id="Java中流的原理"><a href="#Java中流的原理" class="headerlink" title="Java中流的原理:"></a><strong>Java中流的原理:</strong></h4></li>
 </ol>
 <ul>
-<li>可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(管道中流的就是01010101… 这样的字节数据)</li>
-</ul>
-<a id="more"></a>
-<ul>
+<li><p>可以把Java中IO(从文件、网络等等读写数据都是IO)想像成连接着程序和数据源之间的管道，我们既可以通过管道把数据输出到数据源，也可以通过管道将数据从数据源读入。(管道中流的就是01010101… 这样的字节数据)</p>
+</li>
 <li><p>将管道中流进行过滤、包装、转换等操作就产生一系列的装饰流。</p>
 </li>
 <li><p><strong><code>Java中的IO流是指字节数据（bytes data）从源对象对按顺序流向目标对象的一种流动形式</code></strong></p>
@@ -247,6 +243,9 @@
 </ul>
 </li>
 </ul>
+<!-- Read More -->
+<p> <img src="/images/io.png" alt="io.png">                            </p>
+<p>  ​(图片来源于网络)</p>
 <ol>
 <li><h4 id="Java流的分类"><a href="#Java流的分类" class="headerlink" title="Java流的分类:"></a><strong><code>Java流的分类:</code></strong></h4></li>
 </ol>
@@ -432,7 +431,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2017/11/07/Java-I-O流-一-字节流/" data-id="cjbyua8ga0001h7s680eebv3z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2017/11/07/Java-I-O流-一-字节流/" data-id="cjbzvn6yd000146s6fkshmrqy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

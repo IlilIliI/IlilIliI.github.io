@@ -5,19 +5,19 @@
     
     <title>Java集合之 LinkedList 笔记 | Notes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1. LinkedList概述及层次结构(JDK1.8.0_131): 1234// 来自于源码JDK1.8.0_131public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, Deque&amp;lt;E&amp;gt;, Cloneable, java.io">
+    <meta name="description" content="1. LinkedList概述及层次结构(JDK1.8.0_131):  LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用Array">
 <meta name="keywords" content="Java集合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合之 LinkedList 笔记">
 <meta property="og:url" content="http://www.yq194.top/2018/01/02/Java集合之-LinkedList-笔记/index.html">
 <meta property="og:site_name" content="Notes">
-<meta property="og:description" content="1. LinkedList概述及层次结构(JDK1.8.0_131): 1234// 来自于源码JDK1.8.0_131public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, Deque&amp;lt;E&amp;gt;, Cloneable, java.io">
+<meta property="og:description" content="1. LinkedList概述及层次结构(JDK1.8.0_131):  LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用Array">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.yq194.top/images/LinkedList.png">
-<meta property="og:updated_time" content="2018-01-03T08:59:27.000Z">
+<meta property="og:updated_time" content="2018-01-04T02:30:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合之 LinkedList 笔记">
-<meta name="twitter:description" content="1. LinkedList概述及层次结构(JDK1.8.0_131): 1234// 来自于源码JDK1.8.0_131public class LinkedList&amp;lt;E&amp;gt;    extends AbstractSequentialList&amp;lt;E&amp;gt;    implements List&amp;lt;E&amp;gt;, Deque&amp;lt;E&amp;gt;, Cloneable, java.io">
+<meta name="twitter:description" content="1. LinkedList概述及层次结构(JDK1.8.0_131):  LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用Array">
 <meta name="twitter:image" content="http://www.yq194.top/images/LinkedList.png">
     
 
@@ -224,9 +224,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p><a href=""> 1. <strong>LinkedList概述及层次结构(JDK1.8.0_131)</strong>:</a><br><img src="/images/LinkedList.png" alt="LinkedList"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 来自于源码JDK1.8.0_131</span><br><span class="line">public class LinkedList&lt;E&gt;</span><br><span class="line">    extends AbstractSequentialList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+            <p><a href=""> 1. <strong>LinkedList概述及层次结构(JDK1.8.0_131)</strong>:</a></p>
 <ul>
 <li><p>LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用ArrayDeque.</p>
 </li>
@@ -237,6 +235,9 @@
 <li><p>LinkedList插入，删除操作常数时间，顺序访问线性时间. </p>
 </li>
 </ul>
+<!-- Read More -->
+<p><img src="/images/LinkedList.png" alt="LinkedList"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 来自于源码JDK1.8.0_131</span><br><span class="line">public class LinkedList&lt;E&gt;</span><br><span class="line">    extends AbstractSequentialList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable</span><br></pre></td></tr></table></figure>
 <p><a href=""> 2. <strong>LinkedList源码解析(JDK1.8.0_131)</strong>:</a></p>
 <blockquote>
 <p>只列出一些比较常用的操作和部分方法解析</p>
@@ -287,7 +288,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/01/02/Java集合之-LinkedList-笔记/" data-id="cjbyua8go0007h7s6kq0nimgi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/01/02/Java集合之-LinkedList-笔记/" data-id="cjbzvn6yi000346s6ell59vp3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
