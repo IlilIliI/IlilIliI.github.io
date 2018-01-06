@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Java集合之 LinkedList 笔记 | Notes</title>
+    <title>Java集合系列(三): LinkedList源码笔记 | Notes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="1. LinkedList概述及层次结构(JDK1.8.0_131):  LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用Array">
 <meta name="keywords" content="Java集合">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java集合之 LinkedList 笔记">
-<meta property="og:url" content="http://www.yq194.top/2018/01/02/Java集合之-LinkedList-笔记/index.html">
+<meta property="og:title" content="Java集合系列(三): LinkedList源码笔记">
+<meta property="og:url" content="http://www.yq194.top/2018/01/02/Java集合系列(三): LinkedList源码笔记/index.html">
 <meta property="og:site_name" content="Notes">
 <meta property="og:description" content="1. LinkedList概述及层次结构(JDK1.8.0_131):  LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用Array">
 <meta property="og:image" content="http://www.yq194.top/images/LinkedList.png">
-<meta property="og:updated_time" content="2018-01-06T17:15:09.000Z">
+<meta property="og:updated_time" content="2018-01-06T17:32:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java集合之 LinkedList 笔记">
+<meta name="twitter:title" content="Java集合系列(三): LinkedList源码笔记">
 <meta name="twitter:description" content="1. LinkedList概述及层次结构(JDK1.8.0_131):  LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用Array">
 <meta name="twitter:image" content="http://www.yq194.top/images/LinkedList.png">
     
@@ -180,7 +180,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-Java集合之-LinkedList-笔记" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Java集合系列(三): LinkedList源码笔记" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -188,7 +188,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Java集合之 LinkedList 笔记
+            Java集合系列(三): LinkedList源码笔记
         </h1>
     
 
@@ -197,7 +197,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/01/02/Java集合之-LinkedList-笔记/">
+        <a href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/">
             <time datetime="2018-01-02T07:03:18.000Z" itemprop="datePublished">2018-01-02</time>
         </a>
     </div>
@@ -287,7 +287,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/01/02/Java集合之-LinkedList-笔记/" data-id="cjc3m9twb000398s64hx46fwf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/01/02/Java集合系列(三): LinkedList源码笔记/" data-id="cjc3mn8070001gns6xgmmx62v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -372,9 +372,9 @@
         </a>
     
     
-        <a href="/2017/12/27/Java集合之-ArrayList-笔记/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Java集合之 ArrayList 笔记</div>
+            <div class="article-nav-title">Java集合系列(二): ArrayList源码笔记</div>
         </a>
     
 </nav>
@@ -420,10 +420,10 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/01/02/Java集合之-LinkedList-笔记/" class="thumbnail">
+                            <a href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/LinkedList.png)" alt="Java集合之 LinkedList 笔记" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/LinkedList.png)" alt="Java集合系列(三): LinkedList源码笔记" class="thumbnail-image"></span>
     
 </a>
 
@@ -431,7 +431,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
-                            <p class="item-title"><a href="/2018/01/02/Java集合之-LinkedList-笔记/" class="title">Java集合之 LinkedList 笔记</a></p>
+                            <p class="item-title"><a href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/" class="title">Java集合系列(三): LinkedList源码笔记</a></p>
                             <p class="item-date"><time datetime="2018-01-02T07:03:18.000Z" itemprop="datePublished">2018-01-02</time></p>
                         </div>
                     </li>
@@ -439,10 +439,10 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/27/Java集合之-ArrayList-笔记/" class="thumbnail">
+                            <a href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/ArrayList.png)" alt="Java集合之 ArrayList 笔记" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/ArrayList.png)" alt="Java集合系列(二): ArrayList源码笔记" class="thumbnail-image"></span>
     
 </a>
 
@@ -450,7 +450,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
-                            <p class="item-title"><a href="/2017/12/27/Java集合之-ArrayList-笔记/" class="title">Java集合之 ArrayList 笔记</a></p>
+                            <p class="item-title"><a href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/" class="title">Java集合系列(二): ArrayList源码笔记</a></p>
                             <p class="item-date"><time datetime="2017-12-27T09:50:06.000Z" itemprop="datePublished">2017-12-27</time></p>
                         </div>
                     </li>
