@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Java集合系列(五):PriorityQueue优先队列 | Notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1. PriorityQueue概述:  PriorityQueue类实现了Queue接口，她的作用是：能保证每次取出的元素都是队列中权值最小的元素。 遵守了Queue接口的约定：不能存储null值。 PriorityQueue类非线程同步，需要线程同步可使用PriorityBlockingQueue类。 底层实现是数组,以数组的形式维护了一个二叉堆，通过该堆来维护权重。  2. 关于Priori">
+<meta name="keywords" content="Java集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合系列(五):PriorityQueue优先队列">
+<meta property="og:url" content="http://www.yq194.top/2018/01/07/Java集合系列-五-PriorityQueue优先队列/index.html">
+<meta property="og:site_name" content="Notes">
+<meta property="og:description" content="1. PriorityQueue概述:  PriorityQueue类实现了Queue接口，她的作用是：能保证每次取出的元素都是队列中权值最小的元素。 遵守了Queue接口的约定：不能存储null值。 PriorityQueue类非线程同步，需要线程同步可使用PriorityBlockingQueue类。 底层实现是数组,以数组的形式维护了一个二叉堆，通过该堆来维护权重。  2. 关于Priori">
+<meta property="og:image" content="http://www.yq194.top/images/PriorityQueueImpl.png">
+<meta property="og:updated_time" content="2018-01-07T13:02:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合系列(五):PriorityQueue优先队列">
+<meta name="twitter:description" content="1. PriorityQueue概述:  PriorityQueue类实现了Queue接口，她的作用是：能保证每次取出的元素都是队列中权值最小的元素。 遵守了Queue接口的约定：不能存储null值。 PriorityQueue类非线程同步，需要线程同步可使用PriorityBlockingQueue类。 底层实现是数组,以数组的形式维护了一个二叉堆，通过该堆来维护权重。  2. 关于Priori">
+<meta name="twitter:image" content="http://www.yq194.top/images/PriorityQueueImpl.png">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">Notes</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/avatar.png" />
+            <h2 id="name">Yang</h2>
+            <h3 id="title">Java Software Engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>ShangHai, China</span>
+            <a id="follow" target="_blank" href="https://github.com/IlilIliI">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                6
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                3
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Java集合系列-五-PriorityQueue优先队列" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Java集合系列(五):PriorityQueue优先队列
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/">
+            <time datetime="2018-01-07T12:56:06.000Z" itemprop="datePublished">2018-01-07</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Java集合/">Java集合</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><a href="">1. <strong>PriorityQueue概述:</strong></a></p>
+<ul>
+<li><code>PriorityQueue</code>类实现了<code>Queue</code>接口，她的作用是：<strong>能保证每次取出的元素都是队列中权值最小的元素</strong>。</li>
+<li>遵守了<code>Queue</code>接口的约定：<strong>不能存储null值</strong>。</li>
+<li><code>PriorityQueue</code>类<strong>非线程同步</strong>，需要线程同步可使用<code>PriorityBlockingQueue</code>类。</li>
+<li>底层实现是<strong>数组</strong>,以数组的形式维护了一个<strong>二叉堆</strong>，通过该堆来维护<strong>权重</strong>。</li>
+</ul>
+<p><a href="">2. <strong>关于PriorityQueue下的二叉堆:</strong></a></p>
+<p><strong>二叉堆</strong>有如下特性：</p>
+<ul>
+<li><code>任意一个节点的值总是不大于（最大堆）或者不小于（最小堆）其父节点的值</code></li>
+<li><code>堆是一棵完全二叉树</code></li>
+</ul>
+<p>而利用数组来存储这个堆，<strong>父节点</strong>与<strong>左右孩子节点</strong>的数组下标会有如下规律：</p>
+<ul>
+<li><strong>leftNode = 2 * parentNode + 1</strong></li>
+<li><strong>rightNode = 2 * parentNode + 2</strong></li>
+<li><strong>parentNode = (index - 1) / 2</strong></li>
+</ul>
+<a id="more"></a>
+<p><code>leftNode</code>表示左孩子的数组下标,<code>rightNode</code>表示右孩子的下标,<code>parentNode</code>表示父节点的数组下标,<code>index</code>表示任意某一非空节点的数组下标。下面是一个堆的示意图:</p>
+<p><img src="/images/PriorityQueueImpl.png" alt="PriorityQueueImp"></p>
+<p>对比上图和对应的下标规律就可以很清晰的看出父节点与子节点之间的关系。那么堆的创建过程是怎么样的呢？实际上，每添加一个元素，就会进行<strong>权重</strong>的比较，从而将元素置为符合二叉堆特性的合适的位置,下图表示的是一个堆的创建过程：</p>
+<p><img src="/images/create_priorityqueue.gif" alt="create_priorityqueue"></p>
+<p>在<code>PriorityQueue</code>中，通过<code>Comparable</code>接口来实现元素之间的比较，从而得到元素的优先级。如果没有指定<code>Comparable</code>接口,那<code>PriorityQueue</code>将会按照默认规则比较，且实现的堆为<code>最小堆</code>。</p>
+<p><a href="">3. <strong>PriorityQueue源码解析(JDK1.8.0_131):</strong></a></p>
+<p>  首先<code>PriorityQueue</code>底层为<code>Object[] queue</code>,有如下7个构造方法:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//空构造，默认数组大小11</span><br><span class="line">public PriorityQueue();</span><br><span class="line">//指定初始大小</span><br><span class="line">public PriorityQueue(int initialCapacity);</span><br><span class="line">//指定比较器，但不指定初始大小</span><br><span class="line">public PriorityQueue(Comparator&lt;? super E&gt; comparator);</span><br><span class="line">//指定比较器和初始大小</span><br><span class="line">public PriorityQueue(int initialCapacity,</span><br><span class="line">                     Comparator&lt;? super E&gt; comparator) ;</span><br><span class="line">//指定集合内容来构造</span><br><span class="line">public PriorityQueue(Collection&lt;? extends E&gt; c);</span><br><span class="line">//指定某一个PriorityQueue的内容来构造 </span><br><span class="line">public PriorityQueue(PriorityQueue&lt;? extends E&gt; c);</span><br><span class="line">//指定SortedSet的内容来构造</span><br><span class="line">public PriorityQueue(SortedSet&lt;? extends E&gt; c);</span><br></pre></td></tr></table></figure>
+<p>如果传入的是<code>PriorityQueue</code>或<code>SortedSet</code>实例，需要对类型和容量大小进行判断，进行相应的扩容或类型处理。</p>
+<ul>
+<li><a href=""><code>PriorityQueue</code>的创建</a></li>
+</ul>
+<p>如果是初始化指定是某集合如<code>Collection&lt;? extends E&gt; c</code>,那<code>PriorityQueue</code>创建时会<strong>从插入最后一个元素的父节点位置开始建堆</strong>；否则，就会按照<code>offer()</code>方法来边添加元素边调堆结构创建堆。下面是指定集合时创建堆所调用的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private void heapify() &#123;</span><br><span class="line">    //最后一个元素的父节点,siftDown方法见poll()方法解析</span><br><span class="line">    for (int i = (size &gt;&gt;&gt; 1) - 1; i &gt;= 0; i--)</span><br><span class="line">        //每一个父节点一层一层往下与左右孩子节点比较</span><br><span class="line">        siftDown(i, (E) queue[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="">add()和offer()方法</a></li>
+</ul>
+<p><code>add()</code>和<code>offer()</code>方法区别在于返回值和抛出异常的不同，这里其实是一样的，重点关注插入元素的操作。以下面<code>add(10)</code>这个操作为例(这里是最大堆,最小堆最大堆原理一样):</p>
+<p><img src="/images/priorityqueue_add.gif" alt=" priorityqueue_add"></p>
+<p>源码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    if (e == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    modCount++;</span><br><span class="line">    //size是queue的元素个数</span><br><span class="line">    int i = size;</span><br><span class="line">    if (i &gt;= queue.length)</span><br><span class="line">        //创建一个更大的数组把原queue复制过去</span><br><span class="line">        grow(i + 1);</span><br><span class="line">    size = i + 1;</span><br><span class="line">    if (i == 0)</span><br><span class="line">        queue[0] = e;</span><br><span class="line">    else</span><br><span class="line">        //下一个数组位置加入元素</span><br><span class="line">        siftUp(i, e);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">//根据有没comparator分开处理    </span><br><span class="line">private void siftUp(int k, E x) &#123;</span><br><span class="line">    if (comparator != null)</span><br><span class="line">        siftUpUsingComparator(k, x);</span><br><span class="line">    else</span><br><span class="line">        siftUpComparable(k, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//添加新元素并保证原有堆的结构不被破坏</span><br><span class="line">private void siftUpComparable(int k, E x) &#123;</span><br><span class="line">    Comparable&lt;? super E&gt; key = (Comparable&lt;? super E&gt;) x;</span><br><span class="line">    //k = 0 停止，也就是parent = 0(最小/最大推顶)处停止</span><br><span class="line">    while (k &gt; 0) &#123;</span><br><span class="line">        //往上找父节点:parentNode = (index - 1) / 2</span><br><span class="line">        int parent = (k - 1) &gt;&gt;&gt; 1;</span><br><span class="line">        Object e = queue[parent];</span><br><span class="line">        //如果比较大(小)，不满足交换,直接跳出循环,表示已找到该元素的合适位置</span><br><span class="line">        if (key.compareTo((E) e) &gt;= 0)</span><br><span class="line">            break;</span><br><span class="line">        //与父节点交换元素    </span><br><span class="line">        queue[k] = e;</span><br><span class="line">        //k变成parent的下标，不为0就继续循环while</span><br><span class="line">        k = parent;</span><br><span class="line">    &#125;</span><br><span class="line">    queue[k] = key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>offer</code>操作实际上把当前要加入的元素在加入的同时保证堆结构的原有特性，<strong>从k开始，与每层的父节点进行比较直到<code>key.compareTo((E) e)</code>条件满足,不满足时比较到 <code>k = 0</code>处(parent处)停止。</strong><code>siftUp()</code>表示要么是按自然顺序比较，要么是按比较器比较。</p>
+<ul>
+<li><a href="">element()和peek()方法</a></li>
+</ul>
+<p><code>element</code>和<code>peek</code>都表示返回堆中权重最大(最小)的元素，且不删除该元素。前者失败时抛出异常，后者失败时返回null,其他方面无区别。不删除元素，意味着只找元素返回，比较简单。如下:</p>
+<p><img src="/images/priorityquque_peek.png" alt="priorityquque_peek"></p>
+<p>源码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//parent = 0 即可</span><br><span class="line">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">public E peek() &#123;</span><br><span class="line">    return (size == 0) ? null : (E) queue[0];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="">remove()和poll()方法</a></li>
+</ul>
+<p>与前面的一样<code>poll</code>操作删除元素并返回元素值,失败时与<code>remove</code>仅是返回值与抛出异常的不同。这里主要关注删除元素后，堆的结构变化如何保证：</p>
+<p><img src="/images/remove_max_priorityquque.gif" alt="remove_max_priorityquque"></p>
+<p>源码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public E poll() &#123;</span><br><span class="line">    if (size == 0)</span><br><span class="line">        return null;</span><br><span class="line">    int s = --size;</span><br><span class="line">    modCount++;</span><br><span class="line">    //返回为0下标的元素</span><br><span class="line">    E result = (E) queue[0];</span><br><span class="line">    E x = (E) queue[s];</span><br><span class="line">    //删除最后一个元素,用最后一个元素与s = 0位置的元素互换，因为最后一个一般是极大(或小)值</span><br><span class="line">    queue[s] = null;</span><br><span class="line">    if (s != 0)</span><br><span class="line">        //如果不是堆中最后一个元素，就要调整堆结构</span><br><span class="line">        siftDown(0, x);</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line">//根据比较不同来调用，具体实现基本一致</span><br><span class="line">private void siftDown(int k, E x) &#123;</span><br><span class="line">    if (comparator != null)</span><br><span class="line">        siftDownUsingComparator(k, x);</span><br><span class="line">    else</span><br><span class="line">        siftDownComparable(k, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//调整堆结构</span><br><span class="line">private void siftDownComparable(int k, E x) &#123;</span><br><span class="line">    Comparable&lt;? super E&gt; key = (Comparable&lt;? super E&gt;)x;</span><br><span class="line">    //取一半大小比较,因为没有跟叶子节点比较的机会</span><br><span class="line">    int half = size &gt;&gt;&gt; 1;        </span><br><span class="line">    while (k &lt; half) &#123;</span><br><span class="line">        //k的左孩子 : leftNode = 2 * parentNode + 1，这里假设右边是要交换的</span><br><span class="line">        int child = (k &lt;&lt; 1) + 1; // assume left child is least</span><br><span class="line">        Object c = queue[child];</span><br><span class="line">        //k的右孩子 </span><br><span class="line">        int right = child + 1;</span><br><span class="line">        //取左右孩子节点中大(或小)的节点</span><br><span class="line">        if (right &lt; size &amp;&amp;</span><br><span class="line">            ((Comparable&lt;? super E&gt;) c).compareTo((E) queue[right]) &gt; 0)</span><br><span class="line">            //交换right为k</span><br><span class="line">            c = queue[child = right];</span><br><span class="line">        //找到了比x大(或小)的元素，跳出循环</span><br><span class="line">        if (key.compareTo((E) c) &lt;= 0)</span><br><span class="line">            break;    </span><br><span class="line">        queue[k] = c;</span><br><span class="line">        //k继续向下左右孩子节点找应该交换的直到k = half停止</span><br><span class="line">        k = child;</span><br><span class="line">    &#125;</span><br><span class="line">    queue[k] = key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先将删除元素x与第0个元素互换，再拿这个元素调用<code>siftDown(0,x)</code>。<code>siftDown(int k, E x)</code>方法，该方法的作用是<strong>从k指定的位置开始，将x逐层向下与当前点的左右孩子中较小的(较大)那个交换，直到x小于(大于)或等于左右孩子中的任何一个为止。</strong>。而上图中当4节点与8节点交换后，8节点跟7节点交换而不跟6节点交换的原因就在这里(这里是最大堆)。</p>
+<p><a href="">* Collection接口下的remove(Object o)</a></p>
+<p>该方法是Collection接口中的，不算Queue接口方法，只是继承下来了。当执行该方法时可能会使用堆结构发生改变，所以要调用<code>siftDown()</code>方法调整堆结构，仍然是一层一层往下与左右孩子节点比，找到合适的位置。如果<code>remove</code>的是最后一个元素，则直接干掉；如果不是最后一个，就要调整堆。</p>
+<p>源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    int i = indexOf(o);</span><br><span class="line">    if (i == -1)</span><br><span class="line">        return false;</span><br><span class="line">    else &#123;</span><br><span class="line">        removeAt(i);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> private E removeAt(int i) &#123;</span><br><span class="line">    // assert i &gt;= 0 &amp;&amp; i &lt; size;</span><br><span class="line">    modCount++;</span><br><span class="line">    int s = --size;</span><br><span class="line">    //是最后一个元素</span><br><span class="line">    if (s == i) // removed last element</span><br><span class="line">        queue[i] = null;</span><br><span class="line">    else &#123;</span><br><span class="line">        E moved = (E) queue[s];</span><br><span class="line">        queue[s] = null;</span><br><span class="line">        //与最后一个元素交换,并一层一层向下与左右孩子节点比较</span><br><span class="line">        siftDown(i, moved);</span><br><span class="line">        //如果执行siftDown方法向下比较后位置没变，说明该元素是该子树的最小(最大)元素，需要执行上调方</span><br><span class="line">        if (queue[i] == moved) &#123;</span><br><span class="line">            //现原来被删除的位置相同，就往上与父节点比较</span><br><span class="line">            siftUp(i, moved);</span><br><span class="line">            if (queue[i] != moved)</span><br><span class="line">                return moved;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void siftUp(int k, E x) &#123;</span><br><span class="line">    if (comparator != null)</span><br><span class="line">        siftUpUsingComparator(k, x);</span><br><span class="line">    else</span><br><span class="line">        siftUpComparable(k, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void siftUpComparable(int k, E x) &#123;</span><br><span class="line">    Comparable&lt;? super E&gt; key = (Comparable&lt;? super E&gt;) x;</span><br><span class="line">    while (k &gt; 0) &#123;</span><br><span class="line">        //找父节点：parentNode = (index - 1) / 2</span><br><span class="line">        int parent = (k - 1) &gt;&gt;&gt; 1;</span><br><span class="line">        Object e = queue[parent];</span><br><span class="line">        if (key.compareTo((E) e) &gt;= 0)</span><br><span class="line">            break;</span><br><span class="line">        queue[k] = e;</span><br><span class="line">        k = parent;</span><br><span class="line">    &#125;</span><br><span class="line">    queue[k] = key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>只需要往下比较就能调整好位置:</strong>    </p>
+<p><img src="/images/siftdown_pq.png" alt="siftdown_pq"></p>
+<p><strong>往下比较好，发现回到原来位置，此时需要往上与父节点比较:</strong></p>
+<p><img src="/images/priorityququq_siftup.png" alt="priorityququq_siftup"></p>
+<p><a href="">4. <strong>总结:</strong></a></p>
+<ul>
+<li>时间复杂度：<code>offer()</code>,<code>poll()</code>, <code>remove()</code> and <code>add()</code>方法时间复杂度为O(logn);<code>remove(Object obj)</code>和<code>contains()</code>方法需要O(n)时间复杂度;<code>peek()</code>、<code>element()</code>和<code>size()</code>常数时间;</li>
+<li>存储堆的数组是无序的，有序输出需要<code>Arrays.sort()</code></li>
+<li>不能存储<code>null</code>元素且<code>线程不安全</code></li>
+</ul>
+<blockquote>
+<p>参考链接:</p>
+</blockquote>
+<ul>
+<li><a href="http://blog.csdn.net/u011116672/article/details/50997622" target="_blank" rel="noopener">http://blog.csdn.net/u011116672/article/details/50997622</a></li>
+<li><a href="https://github.com/CarpenterLee/JCFInternals/blob/master/markdown/8-PriorityQueue.md" target="_blank" rel="noopener">https://github.com/CarpenterLee/JCFInternals/blob/master/markdown/8-PriorityQueue.md</a></li>
+</ul>
+<blockquote>
+<p>3Q and End!!!!!!!!!!!</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.yq194.top/2018/01/07/Java集合系列-五-PriorityQueue优先队列/" data-id="cjc4sh44l000806s6m9cwwni8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/01/07/Java集合系列-四-Queue-Stack和Deque/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Java集合系列(四):Queue,Stack和Deque</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/PriorityQueueImpl.png)" alt="Java集合系列(五):PriorityQueue优先队列" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
+                            <p class="item-title"><a href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/" class="title">Java集合系列(五):PriorityQueue优先队列</a></p>
+                            <p class="item-date"><time datetime="2018-01-07T12:56:06.000Z" itemprop="datePublished">2018-01-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/07/Java集合系列-四-Queue-Stack和Deque/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ArrayDeque_doublecap.png)" alt="Java集合系列(四):Queue,Stack和Deque" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
+                            <p class="item-title"><a href="/2018/01/07/Java集合系列-四-Queue-Stack和Deque/" class="title">Java集合系列(四):Queue,Stack和Deque</a></p>
+                            <p class="item-date"><time datetime="2018-01-06T17:14:51.000Z" itemprop="datePublished">2018-01-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/LinkedList.png)" alt="Java集合系列(三): LinkedList源码笔记" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
+                            <p class="item-title"><a href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/" class="title">Java集合系列(三): LinkedList源码笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-02T07:03:18.000Z" itemprop="datePublished">2018-01-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/ArrayList.png)" alt="Java集合系列(二): ArrayList源码笔记" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
+                            <p class="item-title"><a href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/" class="title">Java集合系列(二): ArrayList源码笔记</a></p>
+                            <p class="item-date"><time datetime="2017-12-27T09:50:06.000Z" itemprop="datePublished">2017-12-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/07/Java-I-O流-一-字节流/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/io.png)" alt="Java I/O流(一):字节流" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
+                            <p class="item-title"><a href="/2017/11/07/Java-I-O流-一-字节流/" class="title">Java I/O流(一):字节流</a></p>
+                            <p class="item-date"><time datetime="2017-11-07T02:04:14.000Z" itemprop="datePublished">2017-11-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java基础/">Java基础</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/">IO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合/">Java集合</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/IO/" style="font-size: 10px;">IO</a> <a href="/tags/Java集合/" style="font-size: 20px;">Java集合</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Yang<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

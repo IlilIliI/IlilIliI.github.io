@@ -148,7 +148,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                5
+                6
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -177,6 +177,155 @@
 
             
             <section id="main">
+    <article id="post-Java集合系列-五-PriorityQueue优先队列" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/">Java集合系列(五):PriorityQueue优先队列</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/">
+            <time datetime="2018-01-07T12:56:06.000Z" itemprop="datePublished">2018-01-07</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Java集合/">Java集合</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p><a href="">1. <strong>PriorityQueue概述:</strong></a></p>
+<ul>
+<li><code>PriorityQueue</code>类实现了<code>Queue</code>接口，她的作用是：<strong>能保证每次取出的元素都是队列中权值最小的元素</strong>。</li>
+<li>遵守了<code>Queue</code>接口的约定：<strong>不能存储null值</strong>。</li>
+<li><code>PriorityQueue</code>类<strong>非线程同步</strong>，需要线程同步可使用<code>PriorityBlockingQueue</code>类。</li>
+<li>底层实现是<strong>数组</strong>,以数组的形式维护了一个<strong>二叉堆</strong>，通过该堆来维护<strong>权重</strong>。</li>
+</ul>
+<p><a href="">2. <strong>关于PriorityQueue下的二叉堆:</strong></a></p>
+<p><strong>二叉堆</strong>有如下特性：</p>
+<ul>
+<li><code>任意一个节点的值总是不大于（最大堆）或者不小于（最小堆）其父节点的值</code></li>
+<li><code>堆是一棵完全二叉树</code></li>
+</ul>
+<p>而利用数组来存储这个堆，<strong>父节点</strong>与<strong>左右孩子节点</strong>的数组下标会有如下规律：</p>
+<ul>
+<li><strong>leftNode = 2 * parentNode + 1</strong></li>
+<li><strong>rightNode = 2 * parentNode + 2</strong></li>
+<li><strong>parentNode = (index - 1) / 2</strong></li>
+</ul></p>
+            <p class="article-more-link">
+                <a href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/#more">Read More</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.yq194.top/2018/01/07/Java集合系列-五-PriorityQueue优先队列/" data-id="cjc4sh44l000806s6m9cwwni8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-Java集合系列-四-Queue-Stack和Deque" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -219,253 +368,16 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <blockquote>
+            <p><blockquote>
 <p>对比Queue(接口),Stack(类)和Queue(接口)之间的实现，将有利于更好的了解其实现体系及原理。</p>
 </blockquote>
 <p><a href="">1. <strong>Queue,Stack和Deque之间的区别:</strong>
 </a><br>    通过LinkedList的类结构层次和源码可以了解到LinkedList既可以当作<strong>Queue</strong>又可以当作<strong>Deque</strong>（”double ended queue”的简称,发音”Deck”），而在JDK集合类中还有一个<strong>Stack</strong>类表示<strong>栈</strong>（父类是Vector），但推荐使用的ArrayDeque（Deque的子类）这个以数组为底层实现的双端队列来表示栈。</p>
 <p><a href="">2. <strong>JDK中Queue接口与Deque接口的各自主要方法:</strong>
-</a></p>
-<ul>
-<li>Queue的主要方法概要</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>抛出异常</th>
-<th>返回指定值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Insert</td>
-<td><code>add(e)</code></td>
-<td><code>offer(e)</code></td>
-</tr>
-<tr>
-<td>Remove</td>
-<td><code>remove()</code></td>
-<td><code>poll()</code></td>
-</tr>
-<tr>
-<td>Examine</td>
-<td><code>element()</code></td>
-<td><code>peek()</code></td>
-</tr>
-</tbody>
-</table>
-<p>其中，无论作为队列FIFO还是堆栈LIFO，都是通过调用<code>remove()</code>或<code>poll()</code>来移除的元素，返回被移除的元素。<code>offer()</code>通过返回<code>null/false</code>来表示插入元素成功与否，<code>add()</code>通过检查异常来判断；<code>element()</code>和<code>peek()</code>也同样如此，不过他们表示的是只取头元素，而不删除。<strong>Queue通常应当不存储null元素(LinkedList可以存储null)。</strong></p>
-<ul>
-<li>Deque双端队列的主要方法概要</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>头元素(head)</th>
-<th></th>
-<th>尾元素(tail)</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>抛出异常</td>
-<td>返回指定值</td>
-<td>抛出异常</td>
-<td>返回指定值</td>
-</tr>
-<tr>
-<td>Insert</td>
-<td><code>addFirst()</code></td>
-<td><code>offerFirst()</code></td>
-<td><code>addLast()</code></td>
-<td><code>offerLast()</code></td>
-</tr>
-<tr>
-<td>Remove</td>
-<td><code>removeFirst()</code></td>
-<td><code>poolFirst()</code></td>
-<td><code>removeLast()</code></td>
-<td><code>poolLast()</code></td>
-</tr>
-<tr>
-<td>Examine</td>
-<td><code>getFirst()</code></td>
-<td><code>peekFirst()</code></td>
-<td><code>getList()</code></td>
-<td><code>peekLast()</code></td>
-</tr>
-</tbody>
-</table>
-<p> 因为Deque是双端队列，一个引用<code>head</code>指向头,一个引用<code>tail</code>指向尾，所以两端都可以添加，移除和获得元素。同样地，当进行操作时也有以<code>抛出异常</code> 和<code>返回true/false</code>来标识操作成功与否。<strong>Deque的子类应当不存储null元素。</strong></p>
-<ul>
-<li>Stack栈(是类而不是接口)的主要方法概要</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th><code>push(e)</code></th>
-<th><code>pop()</code></th>
-<th><code>peek()</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Stack类的主要是三个方法<code>push(e)</code>元素入栈，<code>pop()</code>元素出栈并删除栈顶元素,<code>peek()</code>元素出栈但不删除栈顶元素。同时，Stack继承自Vector类，是线程同步类(但全是方法上加<code>synchronized</code>来同步，性能不是很好),其继承体系如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Stack&lt;E&gt; extends Vector&lt;E&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>可以存储null元素</strong>,已不推荐使用该类作为栈使用,推荐使用<code>Deque</code>的子类实现:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deque&lt;E&gt; deque = new ArrayDeque&lt;&gt;();</span><br></pre></td></tr></table></figure>
-<p><a href="">3. <strong>JDK中Queue接口，Deque接口与Stack类的方法对比:</strong>
-</a></p>
-<ul>
-<li><em>Deque</em>与<em>Queue</em>相对应的接口：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Queue Method</th>
-<th>Equivalent Deque Method</th>
-<th>对应操作的说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>add(e)</code></td>
-<td><code>addLast(e)</code></td>
-<td>向队尾插入元素，失败则抛出异常</td>
-</tr>
-<tr>
-<td><code>offer(e)</code></td>
-<td><code>offerLast(e)</code></td>
-<td>向队尾插入元素，失败则返回<code>false</code></td>
-</tr>
-<tr>
-<td><code>remove()</code></td>
-<td><code>removeFirst()</code></td>
-<td>获取并删除队首元素，失败则抛出异常</td>
-</tr>
-<tr>
-<td><code>poll()</code></td>
-<td><code>pollFirst()</code></td>
-<td>获取并删除队首元素，失败则返回<code>null</code></td>
-</tr>
-<tr>
-<td><code>element()</code></td>
-<td><code>getFirst()</code></td>
-<td>获取但不删除队首元素，失败则抛出异常</td>
-</tr>
-<tr>
-<td><code>peek()</code></td>
-<td><code>peekFirst()</code></td>
-<td>获取但不删除队首元素，失败则返回<code>null</code></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><em>Deque</em>与<em>Stack</em>对应的接口：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Stack Method</th>
-<th>Equivalent Deque Method</th>
-<th>对应操作的说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>push(e)</code></td>
-<td><code>addFirst(e)</code></td>
-<td>向栈顶插入元素，失败则抛出异常</td>
-</tr>
-<tr>
-<td>无</td>
-<td><code>offerFirst(e)</code></td>
-<td>向栈顶插入元素，失败则返回<code>false</code></td>
-</tr>
-<tr>
-<td><code>pop()</code></td>
-<td><code>removeFirst()</code></td>
-<td>获取并删除栈顶元素，失败则抛出异常</td>
-</tr>
-<tr>
-<td>无</td>
-<td><code>pollFirst()</code></td>
-<td>获取并删除栈顶元素，失败则返回<code>null</code></td>
-</tr>
-<tr>
-<td><code>peek()</code></td>
-<td><code>peekFirst()</code></td>
-<td>获取但不删除栈顶元素，失败则抛出异常</td>
-</tr>
-<tr>
-<td>无</td>
-<td><code>peekFirst()</code></td>
-<td>获取但不删除栈顶元素，失败则返回<code>null</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>Deque</code>接口中的方法主要是添加/删除/查看三类操作，与<code>Queue</code>接口和<code>Stack</code>类在这三个操作方面进行类比就能很好的分清这些方法。总之，很好区分的是<code>Deque</code>接口既能当队列又能当栈，<code>Stack</code>类就是JDK实现的栈，<code>Queue</code>接口就队列接口高层抽象。前面有解析<code>Queue</code>的实现<code>LinkedList</code>类，接下来就是<code>Deque</code>的实现<code>ArrayDeque</code>。</p>
-<p><a href="">4. <strong>ArrayDeque类的源码解析(JDK1.8.0_131):</strong>
-</a></p>
-<p>ArrayDeque底层实现是数组<code>transient Object[] elements;</code>有<code>head</code>指向<strong>头部第一元素的位置</strong>，<code>tail</code>指向<strong>尾部第一个可插入元素的位置</strong>，而且底层数组利用<code>System.arraycopy()</code>来进行扩容。所以综合来说，<code>ArrayDeque</code>底层实现应该是<strong>循环数组</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//底层存储的数组</span><br><span class="line">transient Object[] elements; </span><br><span class="line">//指向首端位置，head可能为负</span><br><span class="line">transient int head;</span><br><span class="line">//指向尾端位置，tail不一定总比head大</span><br><span class="line">transient int tail;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/ArrayDequeImpl.png" alt="ArrayDequeImp"></p>
-<p> 如上图，随着不断的对数组进行操作，<code>head</code>和<code>tail</code>的位置不断的在发生变化。下面来看一些基本操作的方法:</p>
-<ul>
-<li><code>addFirst(e)</code>往首部添加元素</li>
-</ul>
-<p><img src="/images/ArrayDeque_addFirst.png" alt="ArrayDeque_addFirst"></p>
-<p>如上添加 <strong>10</strong> 这个元素，<strong>addFirst(e)</strong>往首部添加是<strong>head</strong>在移动，具体源码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void addFirst(E e) &#123;</span><br><span class="line">    if (e == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    //给数组填充值,这里如果head为负的话，通过</span><br><span class="line">    //(head - 1) &amp; (elements.length - 1)操作能取成正值 </span><br><span class="line">    elements[head = (head - 1) &amp; (elements.length - 1)] = e;</span><br><span class="line">    //进行容量大小判断</span><br><span class="line">    if (head == tail)</span><br><span class="line">        doubleCapacity();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要注意(1).数组容量大小 (2).数组head或tail(addLast)取非负值的问题。添加元素如<code>addFisrt,addLast</code>都是先赋值再进行<code>head==tail</code>的判断,因为tail永远指向下一个可添加元素的位置。其实主要原因还是在<code>elements.length - 1</code>这个位置做了手脚，看下面的源码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> //空构造函数默认数组大小16，而非空构造会调用如下方法</span><br><span class="line"> private void allocateElements(int numElements) &#123;</span><br><span class="line">    // MIN_INITIAL_CAPACITY 为 8 </span><br><span class="line">    int initialCapacity = MIN_INITIAL_CAPACITY;</span><br><span class="line">    // Find the best power of two to hold elements.</span><br><span class="line">    // Tests &quot;&lt;=&quot; because arrays aren&apos;t kept full.  </span><br><span class="line">    //如果传入numElements &lt; 8,那构造数组大小为8</span><br><span class="line">    if (numElements &gt;= initialCapacity) &#123;</span><br><span class="line">        initialCapacity = numElements;</span><br><span class="line">        //下面的操作会把initialCapacity变成接近于</span><br><span class="line">        //numElements附近的值(2的K次方)</span><br><span class="line">        //比如  numElements = 9或10或14，</span><br><span class="line">        //initialCapacity都会变成16,依此类推</span><br><span class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  1);</span><br><span class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  2);</span><br><span class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  4);</span><br><span class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt;  8);</span><br><span class="line">        initialCapacity |= (initialCapacity &gt;&gt;&gt; 16);</span><br><span class="line">        initialCapacity++;</span><br><span class="line"></span><br><span class="line">        if (initialCapacity &lt; 0)   // Too many elements, must back off</span><br><span class="line">            initialCapacity &gt;&gt;&gt;= 1;// Good luck allocating 2 ^ 30 elements</span><br><span class="line">    &#125;</span><br><span class="line">    elements = new Object[initialCapacity];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于上面的无符号位移和异或操作会把<code>initialCapacity</code>变成2的k次方,相应的<code>elements.length - 1</code>的二进制永远是<code>1111111...</code>,再进行类似于<code>addFirst(e)</code>中的<code>(head - 1) &amp; (elements.length - 1)</code>操作，<code>&amp;</code>(与操作，1&amp;1时才为1)操作前缀不管是不是负值都会变成非负值，从而保证了head移动到取负值时也能把head变成相应的非负值,同时<code>&amp;</code>操作也保证了不越出<code>elements.length</code>这个界限。</p>
-<ul>
-<li><code>addLast(e)</code>往尾部添加元素</li>
-</ul>
-<p><img src="/images/ArrayDeque_addLast.png" alt="ArrayDeque_addLast"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> public void addLast(E e) &#123;</span><br><span class="line">    if (e == null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    //先赋值</span><br><span class="line">    elements[tail] = e;</span><br><span class="line">    //检查tail越界情况，addLast移动的是tail</span><br><span class="line">    if ( (tail = (tail + 1) &amp; (elements.length - 1)) == head)</span><br><span class="line">        doubleCapacity();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要看一下<code>doubleCapacity()</code>这个扩容操作:</p>
-<p><img src="/images/ArrayDeque_doublecap.png" alt="ArrayDeque_doublecap"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">private void doubleCapacity() &#123;</span><br><span class="line">       assert head == tail;</span><br><span class="line">       int p = head;</span><br><span class="line">       int n = elements.length;</span><br><span class="line">       // head右边元素个数</span><br><span class="line">       int r = n - p; // number of elements to the right of p</span><br><span class="line">       //原数组长度的2位</span><br><span class="line">       int newCapacity = n &lt;&lt; 1;</span><br><span class="line">       if (newCapacity &lt; 0)</span><br><span class="line">           throw new IllegalStateException(&quot;Sorry, deque too big&quot;);</span><br><span class="line">       Object[] a = new Object[newCapacity];</span><br><span class="line">       //先复制head右边（图绿色部分）</span><br><span class="line">       System.arraycopy(elements, p, a, 0, r);</span><br><span class="line">       //再左边部分(图黄色部分)</span><br><span class="line">       System.arraycopy(elements, 0, a, r, p);</span><br><span class="line">       //数组替换</span><br><span class="line">       elements = a;</span><br><span class="line">       //head，tail重新初始位置</span><br><span class="line">       head = 0;</span><br><span class="line">       tail = n;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>扩容操作就是容量扩充一倍，然后把head和tail相等位置的部分分别先head往右再tail往左复制过来，并初始化<code>head=0,tail=length-1</code>即可。</p>
-<p>*<code>peekFirst()</code></p>
-<p><code>peekFirst()</code>的作用是返回但不删除<em>Deque</em>首端元素，也即是<code>head</code>位置处的元素，直接返回<code>elements[head]</code>即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public E peekFirst() &#123;</span><br><span class="line">    return elements[head]; // elements[head] is null if deque empty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>pollFirst()</code></li>
-</ul>
-<p><code>pollFirst</code>用于删除首部元素，并将该元素返回。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public E pollFirst() &#123;</span><br><span class="line">        int h = head;</span><br><span class="line">        @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">        E result = (E) elements[h];</span><br><span class="line">        // Element is null if deque empty</span><br><span class="line">        if (result == null)</span><br><span class="line">            return null;</span><br><span class="line">        elements[h] = null;     // Must null out slot</span><br><span class="line">        //重新定位head</span><br><span class="line">        head = (h + 1) &amp; (elements.length - 1);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>peekLast()</code></li>
-</ul>
-<p><code>peekLast()</code>的作用是返回但不删除<em>Deque</em>尾端元素，也即是<code>tail</code>位置前面的那个元素。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public E peekLast() &#123;</span><br><span class="line">    return elements[(tail - 1) &amp; (elements.length - 1)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>pollLast()</code></li>
-</ul>
-<p><code>pollLast()</code>的作用是删除并返回<em>Deque</em>尾端元素，也即是<code>tail</code>位置前面的那个元素。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">pollLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = (tail - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>);<span class="comment">//tail的上一个位置</span></span><br><span class="line">    E result = elements[t];</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span>)<span class="comment">//null值意味着deque为空</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    elements[t] = <span class="keyword">null</span>;<span class="comment">//let GC work</span></span><br><span class="line">    tail = t;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其他一系列操作基本上是基于以上操作，就不细说了。</p>
-<p>本文参考链接:</p>
-<ul>
-<li><a href="https://github.com/CarpenterLee/JCFInternals/blob/master/markdown/4-Stack%20and%20Queue.md" target="_blank" rel="noopener">https://github.com/CarpenterLee/JCFInternals/blob/master/markdown/4-Stack%20and%20Queue.md</a></li>
-<li><a href="http://calvin1978.blogcn.com/articles/collection.html" target="_blank" rel="noopener">http://calvin1978.blogcn.com/articles/collection.html</a>  </li>
-</ul>
-<blockquote>
-<p>3Q AND END!!!</p>
-</blockquote>
-
+</a></p></p>
+            <p class="article-more-link">
+                <a href="/2018/01/07/Java集合系列-四-Queue-Stack和Deque/#more">Read More</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -475,7 +387,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/01/07/Java集合系列-四-Queue-Stack和Deque/" data-id="cjc3mn80p0008gns6dswzd3d9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/01/07/Java集合系列-四-Queue-Stack和Deque/" data-id="cjc4sh44m000906s6v3zbc7t6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -616,145 +528,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/01/02/Java集合系列(三): LinkedList源码笔记/" data-id="cjc3mn8070001gns6xgmmx62v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Java集合系列(二): ArrayList源码笔记" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/">Java集合系列(二): ArrayList源码笔记</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/">
-            <time datetime="2017-12-27T09:50:06.000Z" itemprop="datePublished">2017-12-27</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Java集合/">Java集合</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p><a href=""> 1. <strong>ArrayList概述及层次结构(JDK1.8.0_131)</strong>:</a></p>
-<ul>
-<li>ArrayList的底层是对象数组Object[]，可存储null</li>
-<li>未指定初始化大小的默认容量大小是10，超过指定容量后ArrayList采用自动扩容，容量为原来的1.5倍(也就是增加了原来的50%)，1.5倍不大不小刚好，2，2.5。。。都会占用内存大</li>
-<li>ArrayList的扩容采用的System.arraycopy()进行复制;</li>
-<li>底层是数组决定的查找快，增删慢的特性。get（i），set（i，e） 的性能很高，而remove(i,e)，add(i,e)时需要通过System.arraycopy()复制来达移动数组的目的;</li>
-<li>ArrayList是非线程安全的，需要同步情况下可在构造时生成同步的List实例或采用java.util.concurrent下的并发类：<br><code>List list =  Collections.synchronizedList(new ArrayList(...));</code><br><code>CopyOnWriteArrayList list = new CopyOnWriteArrayList();</code></li>
-</ul></p>
-            <p class="article-more-link">
-                <a href="/2017/12/27/Java集合系列(二): ArrayList源码笔记/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://www.yq194.top/2017/12/27/Java集合系列(二): ArrayList源码笔记/" data-id="cjc3mn80l0007gns6z6870q7o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/01/02/Java集合系列(三): LinkedList源码笔记/" data-id="cjc4sh449000306s6suwlci8s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -847,6 +621,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/PriorityQueueImpl.png)" alt="Java集合系列(五):PriorityQueue优先队列" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
+                            <p class="item-title"><a href="/2018/01/07/Java集合系列-五-PriorityQueue优先队列/" class="title">Java集合系列(五):PriorityQueue优先队列</a></p>
+                            <p class="item-date"><time datetime="2018-01-07T12:56:06.000Z" itemprop="datePublished">2018-01-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/01/07/Java集合系列-四-Queue-Stack和Deque/" class="thumbnail">
     
     
@@ -920,25 +713,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/05/13/Mysql join types/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Visual_SQL_JOINS_orig.jpg)" alt="mysql join 详解" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/数据库/">数据库</a></p>
-                            <p class="item-title"><a href="/2017/05/13/Mysql join types/" class="title">mysql join 详解</a></p>
-                            <p class="item-date"><time datetime="2017-05-13T14:44:21.000Z" itemprop="datePublished">2017-05-13</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -948,7 +722,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java基础/">Java基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java基础/">Java基础</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -957,7 +731,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -966,7 +740,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/">IO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合/">Java集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/">IO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合/">Java集合</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
