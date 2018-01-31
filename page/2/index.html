@@ -148,7 +148,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                6
+                7
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -177,6 +177,147 @@
 
             
             <section id="main">
+    <article id="post-Java集合系列(三): LinkedList源码笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/">Java集合系列(三): LinkedList源码笔记</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/">
+            <time datetime="2018-01-02T07:03:18.000Z" itemprop="datePublished">2018-01-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Java集合/">Java集合</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p><a href=""> 1. <strong>LinkedList概述及层次结构(JDK1.8.0_131)</strong>:</a></p>
+<ul>
+<li><p>LinkedList的继承体系中有List接口，Queue接口和Deque接口(double ended queue),表示明了LinkedList既能当作链表又能当作队列(Queue)还能当作栈(Stack);FIFO,LIFO及顺序访问都可以满足，虽然JDK中有Stack(继承自Vector),但官方推荐使用ArrayDeque.</p>
+</li>
+<li><p>LinkedList底层采用双向链表(prev头节点，next尾节点)，元素可以为null,空链表时prev=next=null.</p>
+</li>
+<li><p>LinkedList线程不安全,可以使用Collections.synchronizedList(List<t> list)进行包装.</t></p>
+</li>
+<li><p>LinkedList插入，删除操作常数时间，顺序访问线性时间. </p>
+</li>
+</ul></p>
+            <p class="article-more-link">
+                <a href="/2018/01/02/Java集合系列(三): LinkedList源码笔记/#more">Read More</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.yq194.top/2018/01/02/Java集合系列(三): LinkedList源码笔记/" data-id="cjd2uf2p60006ucs664xs7zw1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-Java集合系列(二): ArrayList源码笔记" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -239,7 +380,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2017/12/27/Java集合系列(二): ArrayList源码笔记/" data-id="cjc7b9kcd000d0ns6215qsltb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2017/12/27/Java集合系列(二): ArrayList源码笔记/" data-id="cjd2uf2p80009ucs6vc8jph04" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -388,145 +529,7 @@
 
 </div>
 
-    <a data-url="http://www.yq194.top/2017/11/07/Java-I-O流-一-字节流/" data-id="cjc7b9kag00010ns622pf9pew" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Mysql join types" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/13/Mysql join types/">mysql join 详解</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/13/Mysql join types/">
-            <time datetime="2017-05-13T14:44:21.000Z" itemprop="datePublished">2017-05-13</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/数据库/">数据库</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/MySQL/">MySQL</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><blockquote>
-<h5 id="SQL-JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。"><a href="#SQL-JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。" class="headerlink" title="SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。"></a>SQL JOIN是从两个或多个数据库表中检索数据的方法。本文介绍了特定SQL联接中的数据的基本概述。理解SQL连接的流行方式是使用维恩图进行可视化，因此每个示例都有相应的维恩图，适当的SELECT语句和结果表。</h5><p>本文参考链接:</p>
-<p>​    <a href="https://dev.mysql.com/doc/refman/5.6/en/join.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.6/en/join.html</a> mysql官方文档</p>
-<p>​        <a href="https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins" target="_blank" rel="noopener">https://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins</a>  codeproject文章</p>
-<p>​        <a href="https://academy.vertabelo.com/blog/sql-joins/" target="_blank" rel="noopener">https://academy.vertabelo.com/blog/sql-joins/</a> mysql joins</p>
-<p>​        <a href="http://stevestedman.com/2015/03/mysql-join-types-poster/" target="_blank" rel="noopener">http://stevestedman.com/2015/03/mysql-join-types-poster/</a>  某博客整理的join图</p>
-<p>​    <a href="http://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join/6188334#6188334" target="_blank" rel="noopener">http://stackoverflow.com/questions/5706437/whats-the-difference-between-inner-join-left-join-right-join-and-full-join/6188334#6188334</a> stackoverflow</p>
-</blockquote></p>
-            <p class="article-more-link">
-                <a href="/2017/05/13/Mysql join types/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://www.yq194.top/2017/05/13/Mysql join types/" data-id="cjc7b9kco000j0ns659334s1g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2017/11/07/Java-I-O流-一-字节流/" data-id="cjd2uf2oz0003ucs6lxoo0xjn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -603,7 +606,7 @@
 
 
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
 </section>
             
@@ -615,6 +618,25 @@
         <h3 class="widget-title">recent</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/31/JVM-GC-笔记/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Jvm%20GC%20.png)" alt="JVM GC 笔记" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/31/JVM-GC-笔记/" class="title">JVM GC 笔记</a></p>
+                            <p class="item-date"><time datetime="2018-01-31T08:19:12.000Z" itemprop="datePublished">2018-01-31</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -692,25 +714,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/11/07/Java-I-O流-一-字节流/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/io.png)" alt="Java I/O流(一):字节流" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Java基础/">Java基础</a></p>
-                            <p class="item-title"><a href="/2017/11/07/Java-I-O流-一-字节流/" class="title">Java I/O流(一):字节流</a></p>
-                            <p class="item-date"><time datetime="2017-11-07T02:04:14.000Z" itemprop="datePublished">2017-11-07</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -729,7 +732,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -738,7 +741,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/">IO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合/">Java集合</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/">IO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合/">Java集合</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
