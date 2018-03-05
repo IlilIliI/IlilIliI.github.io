@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Notes">
 <meta property="og:description" content="1.Java比较常用的日志组件1.Java中常用日志组件的框架 Java中常用的日志实现框架有Apache的Log4j,Log4j2,Log4j创始人的另一个框架logback以及JDK自带的java.util.logging，他们的对比如下:">
 <meta property="og:image" content="http://www.yq194.top/images/log_framework.png">
-<meta property="og:updated_time" content="2018-03-01T07:08:09.000Z">
+<meta property="og:updated_time" content="2018-03-05T02:27:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java日志体系">
 <meta name="twitter:description" content="1.Java比较常用的日志组件1.Java中常用日志组件的框架 Java中常用的日志实现框架有Apache的Log4j,Log4j2,Log4j创始人的另一个框架logback以及JDK自带的java.util.logging，他们的对比如下:">
@@ -255,8 +255,7 @@ var _hmt = _hmt || [];
 <li><strong>JUL</strong><br>JDK自带日志，用的比较少。</li>
 </ul>
 <p><code>日志框架详情可以参考各框架官网。</code></p>
-<p>####2.Java中常用日志接口</p>
-<ul>
+<h4 id="2-Java中常用日志接口"><a href="#2-Java中常用日志接口" class="headerlink" title="2.Java中常用日志接口"></a>2.Java中常用日志接口</h4><ul>
 <li><p>Apache Common-Logging 和 SLF4J是Java日志体系中常用的日志接口。用户可以自由选择第三方的日志组件作为具体实现，像log4j，log4j2，logback，或者jdk自带的logging等等。其对比如下:</p>
 <p><img src="/images/interface_log.png" alt="interface_log"></p>
 </li>
@@ -289,8 +288,7 @@ var _hmt = _hmt || [];
 </ul>
 <p><code>common-logging</code>通过动态查找的机制，在程序运行时自动找出真正使用的日志库。由于它使用了<code>ClassLoader</code>寻找和载入底层的日志库， 导致了象<code>OSGI</code>这样的框架无法正常工作，因为OSGI的不同的插件使用自己的<code>ClassLoader</code>。 OSGI的这种机制保证了插件互相独立，然而却使<code>Apache Commons-Logging</code>无法工作。</p>
 <p><code>slf4j</code>在编译时静态绑定真正的Log库,因此可以再OSGI中使用。另外，SLF4J 支持参数化的<code>log</code>字符串，避免了之前为了减少字符串拼接的性能损耗而不得不写的<code>if(logger.isDebugEnable())</code>，现在你可以直接写：<code>logger.debug(“current user is: {}”, user)</code>。拼装消息被推迟到了它能够确定是不是要显示这条消息的时候，但是获取参数的代价并没有幸免。</p>
-<p>####3.日志集成方案</p>
-<p><a href="">1. JCL(Commons-Logging)集成方案</a></p>
+<h4 id="3-日志集成方案"><a href="#3-日志集成方案" class="headerlink" title="3.日志集成方案"></a>3.日志集成方案</h4><p><a href="">1. JCL(Commons-Logging)集成方案</a></p>
 <p>从<code>JCL</code>加载源码可以了解到只有静态加载方式中几种集成形式:</p>
 <p><img src="/images/jcl.png" alt="jc"></p>
 <p>如果加入了<code>log4j</code>，优先走<code>log4j</code>,其次走<code>JDK14</code>日志，最后才是<code>SimpleLog</code>。由于是动态加载适配找到日志实现，当一个应用中有多个<code>classloader</code>时，<code>jcl</code>日志会失效，比如<code>OSGI</code>。</p>
@@ -329,8 +327,7 @@ var _hmt = _hmt || [];
 </ol>
 <p><img src="/images/spring_log4j2.png" alt="spring_log4j2"></p>
 <p>如果说一个单体应用内的两个模块之间日志不同，也可以借用<code>slf4j</code>来达到日志统一，这样的好处是不用修改任何原有模块的代码。</p>
-<p>####4. 总结</p>
-<p>刚开始对于Java日志总是各种搞不清，不过对整个体系及发展全面了解后，对于应用中的日志使用和集成方案都能做到心中有X数。下面是参考资料(有些文字copy自参考资料，侵删)</p>
+<h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h4><p>刚开始对于Java日志总是各种搞不清，不过对整个体系及发展全面了解后，对于应用中的日志使用和集成方案都能做到心中有X数。下面是参考资料(有些文字copy自参考资料，侵删)</p>
 <ul>
 <li><a href="http://www.blogjava.net/daiyongzhi/archive/2014/04/13/412364.html" target="_blank" rel="noopener">http://www.blogjava.net/daiyongzhi/archive/2014/04/13/412364.html</a> 这篇文章参考并copy了部分框架概述</li>
 <li><a href="http://www.iqiyi.com/w_19rw75p16p.html" target="_blank" rel="noopener">http://www.iqiyi.com/w_19rw75p16p.html</a> java日志视频</li>
@@ -347,7 +344,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/03/01/Java日志体系/" data-id="cjea55ba900066ps6duxvgqsj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/03/01/Java日志体系/" data-id="cjedlvvq20003z8s6xkadaws9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
