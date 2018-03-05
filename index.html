@@ -230,8 +230,7 @@ var _hmt = _hmt || [];
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <h1 id="Jva日志文件详解"><a href="#Jva日志文件详解" class="headerlink" title="Jva日志文件详解"></a>Jva日志文件详解</h1><blockquote>
+            <p><h1 id="Jva日志文件详解"><a href="#Jva日志文件详解" class="headerlink" title="Jva日志文件详解"></a>Jva日志文件详解</h1><blockquote>
 <p>用来记录日志文件配置及结构，使用时便于查询</p>
 </blockquote>
 <h4 id="1-Log4j日志及配置文件详解"><a href="#1-Log4j日志及配置文件详解" class="headerlink" title="1.Log4j日志及配置文件详解"></a>1.Log4j日志及配置文件详解</h4><p><strong>在应用程序中添加日志记录总的来说基于三个目的:</strong></p>
@@ -239,69 +238,10 @@ var _hmt = _hmt || [];
 <li>监视代码中变量的变化情况，周期性的记录到文件中供其他应用进行统计分析工作</li>
 <li>跟踪代码运行时轨迹，作为日后审计的依据; 担当集成开发环境中的调试器的作用</li>
 <li>向文件或控制台打印代码的调试信息。</li>
-</ul>
-<p><strong>Apache组织为我们提供了一个强有力的日志操作包 Log4j。</strong></p>
-<ol>
-<li><p><strong>Log4j组成结构:</strong></p>
-<p> 相当于配置文件业说，Log4j有3个方面的内容: </p>
-<ul>
-<li>（1）根目录(级别和目的地); </li>
-<li>（2）目的地(控制台、文件等等);</li>
-<li><p>（3）输出样式。</p>
-<p><img src="/images/log_three_compont.png" alt="log_three_compont"></p>
-</li>
-</ul>
-</li>
-</ol>
-<p>完整的类结构如下:</p>
-<p><img src="/images/log_%20hierarchy.png" alt="log_ hierarchy"></p>
-<p><strong><code>Logger</code></strong> - 日志写出器，供输出日志信息,注意这里的<del><code>RootCategory</code></del>以前的配置中使用，现在都使用RootLogger配置。<br><strong><code>Appender</code></strong> - 日志目的地，把格式化好的日志信息输出到指定的地方（常用的如下）:</p>
-<ul>
-<li><strong><code>ConsoleAppender</code></strong> - 目的地为控制台的 Appender</li>
-<li><strong><code>FileAppender</code></strong> - 目的地为文件的 Appender</li>
-<li><strong><code>RollingFileAppender</code></strong> - 目的地为大小受限的文件的 Appender</li>
-<li><strong><code>DailyRollingFileAppender</code></strong> - 目的地为每一周期(天/周/月)的文件的Appender</li>
-<li><strong><code>AsyncAppender</code></strong> - 异步的Appender</li>
-</ul>
-<p><strong><code>Layout</code></strong> - 日志格式化器，用来把logging request 格式化成字符串 PatternLayout - 用指定的 pattern 格式化 logging request 的 Layout,有如下<code>Layout</code>:<br><strong><code>HTMLLayout</code></strong>,<strong><code>PatternLayout</code></strong>,<strong><code>SimpleLayout</code></strong>,<strong><code>TTCCLayout</code></strong>,<strong><code>XMLLayout</code></strong></p>
-<ol>
-<li><strong>Log4j基于Properties的日志配置详解:</strong></li>
-</ol>
-<p>Log4j 支持两种配置文件格式，Log4j 支持两种配置文件格式，一种是 XML 格式的文件，一种是 properties(key=value)文件。一个简单Properties的配置示例如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">log4j.rootLogger=INFO, stdout , R</span><br><span class="line"></span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=[QC] %p [%t] %C.%M(%L) | %m%n</span><br><span class="line"></span><br><span class="line">log4j.appender.R=org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.R.File=logs/sys_log.log</span><br><span class="line">log4j.appender.R.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.R.layout.ConversionPattern=%d-[TS] %p %t %c - %m%n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">log4j.logger.org.apache.commons=ERROR</span><br><span class="line">log4j.logger.org.apache.struts=WARN</span><br><span class="line">log4j.logger.org.displaytag=ERROR</span><br><span class="line">log4j.logger.org.springframework=DEBUG</span><br><span class="line">log4j.logger.com.ibatis.db=WARN</span><br><span class="line">log4j.logger.org.apache.velocity=FATAL</span><br><span class="line">log4j.logger.com.canoo.webtest=WARN</span><br><span class="line">log4j.logger.org.hibernate.ps.PreparedStatementCache=WARN</span><br><span class="line">log4j.logger.org.hibernate=DEBUG</span><br></pre></td></tr></table></figure>
-<p>（1）配置根 Logger，其语法为:<br><strong><code>log4j.rootLogger=level,appenderName1,appenderName2, ...</code></strong>，其中，level 是日志记录的优先级，分为 OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL 或者您定义 的级别。Log4j 建议只使用四个级别，优先级从高到低分别是 ERROR、WARN、INFO、DEBUG。通过在这里定义的 级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定义了 INFO 级别，则应用程序中所有 DEBUG 级别的日志信息将不被打印出来。 appenderName 就是指 B 日志信息输出到哪个地方。您可以同时指定多 个输出目的地。优先级:ALL &lt; DEBUG &lt; INFO &lt;WARN &lt; ERROR &lt; FATAL &lt; OFF。</p>
-<p>（2）配置日志信息输出目的地 Appender，其语法为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log4j.appender.appenderName = Log4j提供的appender类 </span><br><span class="line">log4j.appender.appenderName.属性名 = 属性值log4j.appender.appenderName.属性名 = 属性值</span><br></pre></td></tr></table></figure>
-<p>其中，Log4j 提供的常用的 appender 有以下几种:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">org.apache.log4j.ConsoleAppender(控制台)</span><br><span class="line">org.apache.log4j.FileAppender(文件)   </span><br><span class="line">org.apache.log4j.DailyRollingFileAppender(每天产生一个日志文件)  </span><br><span class="line">org.apache.log4j.RollingFileAppender(文件大小到达指定尺寸的时候产生一个新的文件)</span><br><span class="line">org.apache.log4j.WriterAppender(将日志信息以流格式发送到任意指定的地方)</span><br></pre></td></tr></table></figure>
-<p>  <strong><code>ConsoleAppender 选项</code></strong> </p>
-<ul>
-<li><code>Threshold=WARN</code>:指定日志消息的输出最低层次。</li>
-<li><code>ImmediateFlush=true</code>:默认值是 true,意谓着所有的消息都会被立即输出。 </li>
-<li><code>Target=System.err</code>:默认情况下是:System.out,指定输出控制台</li>
-</ul>
-<p><strong><code>FileAppender 选项</code></strong></p>
-<ul>
-<li><code>Threshold=WARN</code>:指定日志消息的输出最低层次。</li>
-<li><code>ImmediateFlush=true</code>:默认值是 true,意谓着所有的消息都会被立即输出。</li>
-<li><code>File=mylog.txt</code>:指定消息输出到 mylog.txt 文件。</li>
-<li><code>Append=false</code>:默认值是 true,即将消息增加到指定文件中，false 指将消息覆盖指定的文件内容</li>
-</ul>
-<p><strong><code>DailyRollingFileAppender 选项</code></strong></p>
-<ul>
-<li><code>Threshold=WARN</code>:指定日志消息的输出最低层次。</li>
-<li><code>ImmediateFlush=true</code>:默认值是 true,意谓着所有的消息都会被立即输出。File=mylog.txt:指定消息输出到 mylog.txt 文件。</li>
-<li><code>Append=false</code>:默认值是 true,即将消息增加到指定文件中，false 指将消息覆盖指定的文件内容。</li>
-<li><p><code>DatePattern=&#39;&#39;.&#39;&#39;yyyy-ww</code>:每周滚动一次文件，即每周产生一个新的文件。 当然也可以指定按月、周、天、时和分。即对应的格式如下:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1)&apos;&apos;.&apos;&apos;yyyy-MM: 每月 </span><br><span class="line">2)&apos;&apos;.&apos;&apos;yyyy-ww: 每周 </span><br><span class="line">3)&apos;&apos;.&apos;&apos;yyyy-MM-dd: 每天 </span><br><span class="line">4)&apos;&apos;.&apos;&apos;yyyy-MM-dd-a: 每天两次 </span><br><span class="line">5)&apos;&apos;.&apos;&apos;yyyy-MM-dd-HH: 每小时</span><br><span class="line">6)&apos;&apos;.&apos;&apos;yyyy-MM-dd-HH-mm: 每分钟</span><br><span class="line">    ```* `DatePattern=&apos;&apos;.&apos;&apos;yyyy-ww`:每周滚动一次文件，即每周产生一个新的文件。 当然也可以指定按月、周、天、时和分。即对应的格式如下:</span><br><span class="line"></span><br><span class="line">**`RollingFileAppender 选项`**</span><br><span class="line">* `Threshold=WARN`:指定日志消息的输出最低层次。* `ImmediateFlush=true`:默认值是 true,意谓着所有的消息都会被立即输出。 File=mylog.txt:指定消息输出到 mylog.txt 文件。* `Append=false`:默认值是 true,即将消息增加到指定文件中，false 指将消息覆盖指定的文件内容。 MaxFileSize=100KB: 后缀可以是 KB, MB 或者是 GB. 在日志文件到达该大小时，将会自动滚动，即将原来的内容移到 mylog.log.1 文件。</span><br><span class="line">* `MaxBackupIndex=2`:指定可以产生的滚动文件的最大数。</span><br><span class="line"></span><br><span class="line">**`配置日志信息的格式(布局)，其语法为:`**</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>log4j.appender.appenderName.layout = Log4j提供的layout类<br>log4j.appender.appenderName.layout.属性 = 值<br>log4j.appender.appenderName.layout.属性 = 值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">其中，Log4j 提供的 layout 有以下几种:</span><br></pre></td></tr></table></figure></p>
-<p>org.apache.log4j.HTMLLayout(以 HTML 表格形式布局)<br>org.apache.log4j.PatternLayout(可以灵活地指定布局模式)<br>org.apache.log4j.SimpleLayout(包含日志信息的级别和信息字符串)<br>org.apache.log4j.TTCCLayout(包含日志产生的时间、线程、类别等等信息)<br>org.apache.log4j.XMLLayout(以XML文件形式，好像用的较少)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">**`1) HTMLLayout 选项`**</span><br><span class="line">* LocationInfo=true:默认值是 false,输出 java 文件名称和行号 Title=my app file: 默认值是 Log4J Log Messages.</span><br><span class="line">**`2) PatternLayout 选项`**</span><br><span class="line">* ConversionPattern=%m%n :指定怎样格式化指定的消息。</span><br><span class="line">**`3) XMLLayout 选项`**</span><br><span class="line">* LocationInfo=true:默认值是 false,输出 java 文件和行号Log4J 采用类似 C 语言中的 printf 函数的打印格式格式化日志信息，打印参数如下:</span><br><span class="line">这里需要说明的就是日志信息格式中几个符号所代表的含义:</span><br><span class="line">  `-X号:` X信息输出时左对齐;</span><br><span class="line">  `%p:` 输出日志信息优先级，即 DEBUG，INFO，WARN，ERROR，FATAL,`%d:` 输出日志时间点的日期或时间，默认格式为 ISO8601，也可以在其后指定格式，比如:%d&#123;yyy MMM dd HH:mm:ss,SSS&#125;，输出类似:2002 年 10 月 18 日 22:10:28，921 %r: 输出自应用启动到输出该 log 信息耗费的毫秒数`%c:` 输出日志信息所属的类目，配置文件中的名字，通常就是所在类的全名(若使用 rootLogger) %t: 输出产生该日志事件的线程名`%l:` 输出日志事件的发生位置，相当于%C.%M(%F:%L)的组合,包括类目名、发生的线程，以及行数。 举例:Testlog4.main(TestLog4.java:10)`%x:` 输出和当前线程相关联的 NDC(嵌套诊断环境)，尤其用到像 java servlets 这样的多客户多线程的应 用中。`%%:` 输出一个&quot;%&quot;字符`%F:` 输出日志消息产生时所在的文件名称`%L:` 输出代码中的行号**`%m:`** 输出代码中指定的消息,产生的日志具体信息**`%n:`** 输出一个回车换行符，Windows 平台为&quot;\r\n&quot;，Unix 平台为&quot;\n&quot;输出日志信息换行</span><br><span class="line"> **`%M:`** 输出日志信息所属的方法 可以在%与模式字符之间加上修饰符来控制其最小宽度、最大宽度、和文本的对齐方式。如:     **`og4j.appender.A1.layout.ConversionPattern=%-4r %-5p %d&#123;yyyy-MM-dd HH:mm:ssS&#125; %c %m%n`**</span><br></pre></td></tr></table></figure></p>
-<p>1)%20c:指定输出 category 的名称，最小的宽度是 20，如果 category 的名称小于 20 的话，默认的情 况下右对齐。<br>2)%-20c:指定输出 category 的名称，最小的宽度是 20，如果 category 的名称小于 20 的话，”-“号指 定左对齐。<br>3)%.30c:指定输出 category 的名称，最大的宽度是 30，如果 category 的名称大于 30 的话，就会将左 边多出的字符截掉，但小于 30 的话也不会有空格。<br>4)%20.30c:如果 category 的名称小于 20 就补空格，并且右对齐，如果其名称长于 30 字符，就从左边交 远销出的字符截掉<br>```</p>
-<p><strong><code>这里需要注意的一个地方是Appender中的 Threshold=WARN配置：与rootLogger中的level有区别，假如Threshold=WARN（ALL &lt; DEBUG &lt; INFO &lt;WARN &lt; ERROR &lt; FATAL &lt; OFF）那么DEBUG,INFO不会输出，即使是level配置了INFO。这样子在日志分级输出成不同文件时很有用，比如error打印到A文件，info打印到B文件</code></strong></p>
-<p><a href="https://logback.qos.ch/translator/" target="_blank" rel="noopener">https://logback.qos.ch/translator/</a> log4j.propreties转logback.xml工具</p>
-
+</ul></p>
+            <p class="article-more-link">
+                <a href="/2018/03/05/Java常用日志框架配置文件详解/#more">Read More</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -311,7 +251,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/03/05/Java常用日志框架配置文件详解/" data-id="cjee3565n0001ovs6jv251zdh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/03/05/Java常用日志框架配置文件详解/" data-id="cjee39t5z0003qps6iozfvd4s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -447,7 +387,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/03/01/Java日志体系/" data-id="cjee3565z0006ovs6yircnl0x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/03/01/Java日志体系/" data-id="cjee39t5u0001qps60ubfg82m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -585,7 +525,7 @@ var _hmt = _hmt || [];
 
 </div>
 
-    <a data-url="http://www.yq194.top/2018/01/31/JVM-GC-笔记/" data-id="cjee3565s0003ovs6tyz2d1ys" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://www.yq194.top/2018/01/31/JVM-GC-笔记/" data-id="cjee39t6f000dqps69ph8kl5k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
