@@ -3,17 +3,21 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Notes</title>
+    <title>Java常用日志框架配置文件详解 | Notes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="好记性不如烂笔头。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Notes">
-<meta property="og:url" content="http://www.yq194.top/index.html">
+    <meta name="description" content="Jva日志文件详解 用来记录日志文件配置及结构，使用时便于查询  1.Log4j日志及配置文件详解在应用程序中添加日志记录总的来说基于三个目的:  监视代码中变量的变化情况，周期性的记录到文件中供其他应用进行统计分析工作 跟踪代码运行时轨迹，作为日后审计的依据; 担当集成开发环境中的调试器的作用 向文件或控制台打印代码的调试信息。  Apache组织为我们提供了一个强有力的日志操作包 Log4j。">
+<meta name="keywords" content="Java日志">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java常用日志框架配置文件详解">
+<meta property="og:url" content="http://www.yq194.top/2018/03/05/Java常用日志框架配置文件详解/index.html">
 <meta property="og:site_name" content="Notes">
-<meta property="og:description" content="好记性不如烂笔头。">
+<meta property="og:description" content="Jva日志文件详解 用来记录日志文件配置及结构，使用时便于查询  1.Log4j日志及配置文件详解在应用程序中添加日志记录总的来说基于三个目的:  监视代码中变量的变化情况，周期性的记录到文件中供其他应用进行统计分析工作 跟踪代码运行时轨迹，作为日后审计的依据; 担当集成开发环境中的调试器的作用 向文件或控制台打印代码的调试信息。  Apache组织为我们提供了一个强有力的日志操作包 Log4j。">
+<meta property="og:image" content="http://www.yq194.top/images/log_%20hierarchy.png">
+<meta property="og:updated_time" content="2018-03-05T10:31:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Notes">
-<meta name="twitter:description" content="好记性不如烂笔头。">
+<meta name="twitter:title" content="Java常用日志框架配置文件详解">
+<meta name="twitter:description" content="Jva日志文件详解 用来记录日志文件配置及结构，使用时便于查询  1.Log4j日志及配置文件详解在应用程序中添加日志记录总的来说基于三个目的:  监视代码中变量的变化情况，周期性的记录到文件中供其他应用进行统计分析工作 跟踪代码运行时轨迹，作为日后审计的依据; 担当集成开发环境中的调试器的作用 向文件或控制台打印代码的调试信息。  Apache组织为我们提供了一个强有力的日志操作包 Log4j。">
+<meta name="twitter:image" content="http://www.yq194.top/images/log_%20hierarchy.png">
     
 
     
@@ -187,16 +191,15 @@ var _hmt = _hmt || [];
 </aside>
 
             
-            <section id="main">
-    <article id="post-Java常用日志框架配置文件详解" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Java常用日志框架配置文件详解" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/03/05/Java常用日志框架配置文件详解/">Java常用日志框架配置文件详解</a>
+        <h1 class="article-title" itemprop="name">
+            Java常用日志框架配置文件详解
         </h1>
     
 
@@ -385,287 +388,31 @@ var _hmt = _hmt || [];
         </footer>
     </div>
     
-</article>
-
-
-
-    <article id="post-Java日志体系" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
         
-        
-            <header class="article-header">
-                
+<nav id="article-nav">
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/03/01/Java日志体系/">Java日志体系</a>
-        </h1>
     
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/03/01/Java日志体系/">
-            <time datetime="2018-03-01T07:00:59.000Z" itemprop="datePublished">2018-03-01</time>
+        <a href="/2018/03/01/Java日志体系/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Java日志体系</div>
         </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Java基础/">Java基础</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Java日志/">Java日志</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h3 id="1-Java比较常用的日志组件"><a href="#1-Java比较常用的日志组件" class="headerlink" title="1.Java比较常用的日志组件"></a>1.Java比较常用的日志组件</h3><h4 id="1-Java中常用日志组件的框架"><a href="#1-Java中常用日志组件的框架" class="headerlink" title="1.Java中常用日志组件的框架"></a>1.Java中常用日志组件的框架</h4><ul>
-<li>Java中常用的日志实现框架有Apache的<code>Log4j</code>,<code>Log4j2</code>,Log4j创始人的另一个框架<code>logback</code>以及JDK自带的java.util.logging，他们的对比如下:</li>
-</ul>
-<p><img src="/images/log_framework.png" alt="log_framework"></p></p>
-            <p class="article-more-link">
-                <a href="/2018/03/01/Java日志体系/#more">Read More</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://www.yq194.top/2018/03/01/Java日志体系/" data-id="cjee3565z0006ovs6yircnl0x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="http://www.yq194.top/2018/03/01/Java日志体系/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://www.yq194.top/2018/03/01/Java日志体系/">Comments</a>
-    
+</nav>
 
-        </footer>
-    </div>
+
     
 </article>
 
 
-
-    <article id="post-JVM-GC-笔记" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/01/31/JVM-GC-笔记/">JVM GC 笔记</a>
-        </h1>
     
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/01/31/JVM-GC-笔记/">
-            <time datetime="2018-01-31T08:19:12.000Z" itemprop="datePublished">2018-01-31</time>
-        </a>
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/JVM/">JVM</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/JVM/">JVM</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <blockquote>
-<p>JVM GC笔记 </p>
-</blockquote>
-<p><img src="/images/Jvm%20GC%20.png" alt="Jvm GC "></p>
-<blockquote>
-<p>链接地址: <a href="https://github.com/IlilIliI/practice-in-java/tree/master/practice-javase-basic/src/main/java/com/github/IlilIliI/jvm/doc" target="_blank" rel="noopener">https://github.com/IlilIliI/practice-in-java/tree/master/practice-javase-basic/src/main/java/com/github/IlilIliI/jvm/doc</a></p>
-</blockquote>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://www.yq194.top/2018/01/31/JVM-GC-笔记/" data-id="cjee3565s0003ovs6tyz2d1ys" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://www.yq194.top/2018/01/31/JVM-GC-笔记/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://www.yq194.top/2018/01/31/JVM-GC-笔记/">Comments</a>
+</section>
     
 
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
 </section>
             
                 
@@ -847,11 +594,13 @@ var _hmt = _hmt || [];
     <script>
     var disqus_config = function () {
         
-        this.page.identifier = '';
+            this.page.url = 'http://www.yq194.top/2018/03/05/Java常用日志框架配置文件详解/';
+        
+        this.page.identifier = 'Java常用日志框架配置文件详解';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'yq194.top' + '.disqus.com/count.js';
+        s.src = '//' + 'yq194.top' + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
